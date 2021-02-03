@@ -8,6 +8,8 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
+// require('ejs');
+
 const superagent = require('superagent');
 const pg = require('pg');
 
@@ -16,8 +18,8 @@ const methodOverride = require('method-override');
 
 
 // Database Connection Setup
-const client = new pg.Client(process.env.DATABASE_URL);
-client.on('error', err => { throw err; });
+// const client = new pg.Client(process.env.DATABASE_URL);
+// client.on('error', err => { throw err; });
 
 
 // Step 2:  Set up our application
@@ -114,19 +116,56 @@ function searchPage(request, response) {
     });
 
 }
+
+// app.get('/', homePage);
+app.get('/', npsHandler)
+// app.get('/', searchHandler);
+
+
+
+    //NPS API 
+    function npsHandler(request, response) {
+      // console.log(request.body);
+      // const searchQuery = request.body;
+      // console.log(request.body);
+      let URL = `https://developer.nps.gov/api/v1/campgrounds?stateCode=wa&api_key=GtQ3AyZGsofCWkBDeU8TfwxgpnVtGleMeqhlIWQ7`;
+      // if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
+      // if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
+      console.log('URL', URL);
+      superagent.get(URL)
+        .then(data => {
+          console.log('!!!!!3452552345435325345230530538405835435345353545345435');
+          console.log('!!!!!', data.body.data[0].name);
+          const campGround = data.body.data;
+          // const finalBookArray = book.map(campGround => new campGround(campGround));
+          response.render('index', { data: campGround });
+        });
+    
+    }
+
+
+    //ADDED THIS TO PUSH
+
 //Book Construtor
 
-function Book(book) {
-  this.title = book.title ? book.title : 'no title found';
-  this.description = book.description ? book.description : 'no description found';
-  this.authors = book.authors ? book.authors[0] : 'no author found';
-  this.isbn = book.industryIdentifiers;
-  //splice method
-  //
-  console.log('url', URL);
-}
+// function Map() {
+//   this.title = book.title ? book.title : 'no title found';
+//   this.description = book.description ? book.description : 'no description found';
+//   this.authors = book.authors ? book.authors[0] : 'no author found';
+//   this.isbn = book.industryIdentifiers;
+//   //splice method
+//   //
+//   console.log('url', URL);
+// }
 
+// function AirQ() {
+//   this.title = book.title ? book.title : 'no title found';
+// }
 
+// function Weather(result) {
+//   this.time = new Date(result.ts * 1000).toDateString();
+//   this.forecast = result.weather.description;
+// }
 
 
 function errHandler(request, response) {
@@ -134,15 +173,15 @@ function errHandler(request, response) {
 }
 
 
-client.connect()
-  .then(() => {
+// client.connect()
+//   .then(() => {
     app.listen(PORT, () => {
       console.log(`App Listening on port: ${PORT}`);
     });
-  })
-  .catch(error => {
-    console.log(error);
-  });
+  // })
+  // .catch(error => {
+  //   console.log(error);
+  // });
 
 
 // app.listen(PORT, () => {
@@ -150,14 +189,13 @@ client.connect()
 // });
 
 // Connect to DB and Start the Web Server
-client.connect()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log('Server up on', PORT);
-      console.log(`Connected to database ${client.connectionParameters.database}`);
-    });
-  })
-  .catch(err => {
-    console.log('ERROR', err);
-  });
-
+// client.connect()
+//   .then(() => {
+//     app.listen(PORT, () => {
+//       console.log('Server up on', PORT);
+//       console.log(`Connected to database ${client.connectionParameters.database}`);
+//     });
+//   })
+//   .catch(err => {
+//     console.log('ERROR', err);
+//   });
