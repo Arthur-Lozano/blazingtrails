@@ -8,12 +8,9 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
-<<<<<<< HEAD
-=======
-// require('ejs');
->>>>>>> efa1b0082ef5c4660494d347475910ed95e081a5
 const superagent = require('superagent');
 const pg = require('pg');
+
 
 const methodOverride = require('method-override');
 
@@ -29,6 +26,7 @@ const methodOverride = require('method-override');
 app.use(cors());
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
+app.use(express.static('./public/styles'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
@@ -38,6 +36,88 @@ const PORT = process.env.PORT || 3000;
 
 //routes
 // app.get('/index', homeHandler);
+
+app.get('/', homePage);
+app.get('/new', searchPage)
+app.post('/searches', searchHandler);
+
+
+// constuctor functions
+function homePage(request, response) {
+
+  const sql = 'SELECT * FROM booktable;';
+  return client.query(sql)
+    .then(results => {
+      console.log(results.rows);
+      response.status(200).render('pages/server');
+    })
+    .catch((error) => {
+      console.log(error);
+      response.render('pages/error');
+    });
+}
+function deleteBook(request, response) {
+  const id = request.params.book - id;
+  let sql = 'DELETE FROM booktable WHERE id=$1;';
+  let safeValues = [id];
+  client.query(sql, safeValues);
+  response.status(200).redirect('/');
+}
+
+function singleBookHandler(request, response) {
+  const id = request.params.book_id;
+  console.log('in the one book function', id);
+  const sql = 'SELECT * FROM booktable WHERE id=$1;';
+  const safeValues = [id];
+  superagent(sql)
+    .then((results) => {
+      console.log(results);
+      const myFavBook = results.rows[0];
+      response.render('pages/books/detail', { value: myFavBook });
+    })
+    .catch((error) => {
+      console.log(error);
+      response.render('pages/error');
+    });
+}
+function searchHandler(request, response) {
+  response.render('searches/new.ejs');
+}
+
+function addBookToDatabase(request, response) {
+  const { authors, title, isbn, image, description } = request.body;
+  const sql = 'INSERT INTO booktable (author, title, isbn, image_url, description) VALUES ($1,$2,$3,$4,$5) RETURNING id;';
+  const safeValues = [authors, title, isbn, image, description];
+  client.query(sql, safeValues)
+    .then((idFromSQL) => {
+      console.log(idFromSQL);
+      response.redirect(`books/${idFromSQL.rows[0].id}`);
+    }).catch((error) => {
+      console.log(error);
+      response.render('pages/error');
+    });
+}
+
+function searchPage(request, response) {
+  console.log(request.body);
+  const searchQuery = request.body.searchQuery;
+  const searchType = request.body.searchType;
+  console.log(request.body);
+  let URL = `https://www.googleapis.com/books/v1/volumes?q=in${request.body.searchType}:${request.body.searchQuery}`;
+  if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
+  if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
+  console.log('URL', URL);
+  superagent.get(URL)
+    .then(data => {
+      console.log(data.body.items[1]);
+      const book = data.body.items;
+      const finalBookArray = book.map(books => new Book(books.volumeInfo));
+      response.render('searches/show', { renderContent: finalBookArray });
+    });
+
+}
+
+
 // app.get('/', homePage);
 app.get('/', npsHandler)
 // app.get('/', searchHandler);
@@ -66,6 +146,7 @@ app.get('/', npsHandler)
 
 
     //ADDED THIS TO PUSH
+
 //Book Construtor
 
 // function Map() {
