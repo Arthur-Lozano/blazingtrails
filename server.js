@@ -11,13 +11,13 @@ const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
 
+
 const methodOverride = require('method-override');
 
 
 // Database Connection Setup
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', err => { throw err; });
-
 
 
 // Step 2:  Set up our application
