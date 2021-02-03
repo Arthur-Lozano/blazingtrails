@@ -36,8 +36,8 @@ const PORT = process.env.PORT || 3000;
 //routes
 // app.get('/index', homeHandler);
 app.get('/', homePage);
-app.get('/new', searchPage)
-app.post('/searches', searchHandler);
+app.get('/new', npsHandler)
+app.get('/searches', searchHandler);
 
 
 // constuctor functions
@@ -62,27 +62,29 @@ function deleteBook(request, response) {
   response.status(200).redirect('/');
 }
 
-function singleBookHandler(request, response) {
-  const id = request.params.book_id;
-  console.log('in the one book function', id);
-  const sql = 'SELECT * FROM booktable WHERE id=$1;';
-  const safeValues = [id];
-  superagent(sql)
-    .then((results) => {
-      console.log(results);
-      const myFavBook = results.rows[0];
-      response.render('pages/books/detail', { value: myFavBook });
-    })
-    .catch((error) => {
-      console.log(error);
-      response.render('pages/error');
+function npsHandler(request, response) {
+  let key = process.env.WEATHER_API_KEY;
+  let lat = request.query.latitude;
+  let lon = request.query.longitude;
+  const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${key}&lat=${lat}&lon=${lon}&days=8`;
+  // console.log('>>>>>', url);
+  superagent.get(url)
+    .then(value => {
+      const weatherData = value.body.data.map(current => {
+        return new Weather(current);
+      });
+      response.status(200).send(weatherData);
+    }).catch(error => {
+      console.log('ERROR', error);
+      response.status(500).send('So sorry, something went wrong.');
     });
 }
+
 function searchHandler(request, response) {
   response.render('searches/new.ejs');
 }
 
-function addBookToDatabase(request, response) {
+function addRouteToDatabase(request, response) {
   const { authors, title, isbn, image, description } = request.body;
   const sql = 'INSERT INTO booktable (author, title, isbn, image_url, description) VALUES ($1,$2,$3,$4,$5) RETURNING id;';
   const safeValues = [authors, title, isbn, image, description];
@@ -99,9 +101,11 @@ function addBookToDatabase(request, response) {
 function searchPage(request, response) {
   console.log(request.body);
   const searchQuery = request.body.searchQuery;
-  const searchType = request.body.searchType;
+  const key = NPIkey;
   console.log(request.body);
-  let URL = `https://www.googleapis.com/books/v1/volumes?q=in${request.body.searchType}:${request.body.searchQuery}`;
+  let URL=`https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=${key}`;
+      
+
   if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
   if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
   console.log('URL', URL);
@@ -113,10 +117,28 @@ function searchPage(request, response) {
       response.render('searches/show', { renderContent: finalBookArray });
     });
 
+    //Weather API 
+    function weatherHandler(request, response) {
+      let key = process.env.WEATHER_API_KEY;
+      let lat = request.query.latitude;
+      let lon = request.query.longitude;
+      const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${key}&lat=${lat}&lon=${lon}&days=8`;
+      // console.log('>>>>>', url);
+      superagent.get(url)
+        .then(value => {
+          const weatherData = value.body.data.map(current => {
+            return new Weather(current);
+          });
+          response.status(200).send(weatherData);
+        }).catch(error => {
+          console.log('ERROR', error);
+          response.status(500).send('So sorry, something went wrong.');
+        });
+    }
 }
 //Book Construtor
 
-function Book(book) {
+function Map() {
   this.title = book.title ? book.title : 'no title found';
   this.description = book.description ? book.description : 'no description found';
   this.authors = book.authors ? book.authors[0] : 'no author found';
@@ -126,7 +148,14 @@ function Book(book) {
   console.log('url', URL);
 }
 
+function AirQ() {
+  this.title = book.title ? book.title : 'no title found';
+}
 
+function Weather(result) {
+  this.time = new Date(result.ts * 1000).toDateString();
+  this.forecast = result.weather.description;
+}
 
 
 function errHandler(request, response) {
