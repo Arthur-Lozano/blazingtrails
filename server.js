@@ -49,7 +49,7 @@ app.get('/', npsHandler)
       // console.log(request.body);
       // const searchQuery = request.body;
       // console.log(request.body);
-      let URL = `https://developer.nps.gov/api/v1/campgrounds?stateCode=wa&api_key=GtQ3AyZGsofCWkBDeU8TfwxgpnVtGleMeqhlIWQ7`;
+      let URL = `https://developer.nps.gov/api/v1/campgrounds?stateCode=wa&api_key=`;
       // if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
       // if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
       console.log('URL', URL);
