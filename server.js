@@ -72,29 +72,4 @@ function campGround() {
   this.image = book.industryIdentifiers;
 }
 
-// function AirQ() {
-//   this.title = book.title ? book.title : 'no title found';
-// }
-
-// function Weather(result) {
-//   this.time = new Date(result.ts * 1000).toDateString();
-//   this.forecast = result.weather.description;
-// }
-
-
-function errHandler(request, response) {
-  response.status(404).render('pages/error');
-}
-
-
-// client.connect()
-//   .then(() => {
-    app.listen(PORT, () => {
-      console.log(`App Listening on port: ${PORT}`);
-    });
-  // })
-  // .catch(error => {
-  //   console.log(error);
-  // });
-
 
