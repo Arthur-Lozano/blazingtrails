@@ -8,10 +8,6 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
-<<<<<<< HEAD
-=======
-// require('ejs');
->>>>>>> efa1b0082ef5c4660494d347475910ed95e081a5
 const superagent = require('superagent');
 const pg = require('pg');
 
@@ -49,7 +45,8 @@ app.get('/', npsHandler)
       // console.log(request.body);
       // const searchQuery = request.body;
       // console.log(request.body);
-      let URL = `https://developer.nps.gov/api/v1/campgrounds?stateCode=wa&api_key=GtQ3AyZGsofCWkBDeU8TfwxgpnVtGleMeqhlIWQ7`;
+      const key = process.env.npiKey;
+      let URL = `https://developer.nps.gov/api/v1/campgrounds?stateCode=wa&api_key=${key}`;
       // if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
       // if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
       console.log('URL', URL);
@@ -57,8 +54,8 @@ app.get('/', npsHandler)
         .then(data => {
           console.log('!!!!!3452552345435325345230530538405835435345353545345435');
           console.log('!!!!!', data.body.data[0].name);
-          const campGround = data.body.data;
-          // const finalBookArray = book.map(campGround => new campGround(campGround));
+          // const campGround = data.body.data;
+          const finalBookArray = data.body.data.map(campGround => new campGround(campGround));
           response.render('index', { data: campGround });
         });
     
@@ -66,17 +63,14 @@ app.get('/', npsHandler)
 
 
     //ADDED THIS TO PUSH
-//Book Construtor
+//NPS Construtor
 
-// function Map() {
-//   this.title = book.title ? book.title : 'no title found';
-//   this.description = book.description ? book.description : 'no description found';
-//   this.authors = book.authors ? book.authors[0] : 'no author found';
-//   this.isbn = book.industryIdentifiers;
-//   //splice method
-//   //
-//   console.log('url', URL);
-// }
+function campGround() {
+  this.name = book.title ? book.title : 'no title found';
+  this.description = book.description ? book.description : 'no description found';
+  this.url = book.authors ? book.authors[0] : 'no author found';
+  this.image = book.industryIdentifiers;
+}
 
 // function AirQ() {
 //   this.title = book.title ? book.title : 'no title found';
@@ -104,18 +98,3 @@ function errHandler(request, response) {
   // });
 
 
-// app.listen(PORT, () => {
-//   console.log(`now listening on port ${PORT}`);
-// });
-
-// Connect to DB and Start the Web Server
-// client.connect()
-//   .then(() => {
-//     app.listen(PORT, () => {
-//       console.log('Server up on', PORT);
-//       console.log(`Connected to database ${client.connectionParameters.database}`);
-//     });
-//   })
-//   .catch(err => {
-//     console.log('ERROR', err);
-//   });
