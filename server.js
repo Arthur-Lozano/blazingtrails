@@ -8,8 +8,6 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
-// require('ejs');
-
 const superagent = require('superagent');
 const pg = require('pg');
 
@@ -20,6 +18,7 @@ const methodOverride = require('method-override');
 // Database Connection Setup
 // const client = new pg.Client(process.env.DATABASE_URL);
 // client.on('error', err => { throw err; });
+
 
 
 // Step 2:  Set up our application
@@ -37,6 +36,7 @@ const PORT = process.env.PORT || 3000;
 
 //routes
 // app.get('/index', homeHandler);
+
 app.get('/', homePage);
 app.get('/new', searchPage)
 app.post('/searches', searchHandler);
@@ -116,6 +116,7 @@ function searchPage(request, response) {
     });
 
 }
+
 
 // app.get('/', homePage);
 app.get('/', npsHandler)
