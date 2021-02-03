@@ -8,9 +8,9 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
-// require('ejs');
 const superagent = require('superagent');
 const pg = require('pg');
+
 
 const methodOverride = require('method-override');
 
@@ -20,12 +20,12 @@ const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', err => { throw err; });
 
 
-
 // Step 2:  Set up our application
 
 app.use(cors());
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
+app.use(express.static('./public/styles'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
@@ -47,7 +47,7 @@ function homePage(request, response) {
   return client.query(sql)
     .then(results => {
       console.log(results.rows);
-      response.status(200).render('pages/index');
+      response.status(200).render('pages/server');
     })
     .catch((error) => {
       console.log(error);
