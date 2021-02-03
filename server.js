@@ -8,6 +8,10 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
+<<<<<<< HEAD
+=======
+// require('ejs');
+>>>>>>> efa1b0082ef5c4660494d347475910ed95e081a5
 const superagent = require('superagent');
 const pg = require('pg');
 
