@@ -7,20 +7,9 @@
 </head>
 <body>
   <ul>
-    <% renderedContent.forEach(book=> { %>
-      <li>img src="<%= book.image_url %>" alt="<%= book.title %>">
-            <p id="title">
-              <%= book.title %>
-            </p>
-            <p id="title">
-              <%= book.author %>
-            </p>
-            <p>
-              <%= book.description %>
-            </p>
-            <button><a href="/books/<%= book.id %>">View Details</a></button></li>
+    <% data.forEach(campInfo=> { %>
+      <li><%= campInfo.name %> </li>
       <% }) %>
-
   </ul>
   
 </body>
