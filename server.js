@@ -55,7 +55,7 @@ app.get('/', npsHandler)
           console.log('!!!!!3452552345435325345230530538405835435345353545345435');
           console.log('!!!!!', data.body.data[0].name);
           // const campGround = data.body.data;
-          const finalBookArray = data.body.data.map(campGround => new campGround(campGround));
+          const finalBookArray = data.body.data.map(campGround => new Camp(campGround));
           response.render('index', { data: campGround });
         });
     
@@ -65,11 +65,11 @@ app.get('/', npsHandler)
     //ADDED THIS TO PUSH
 //NPS Construtor
 
-function campGround() {
-  this.name = book.title ? book.title : 'no title found';
-  this.description = book.description ? book.description : 'no description found';
-  this.url = book.authors ? book.authors[0] : 'no author found';
-  this.image = book.industryIdentifiers;
+function Camp(result) {
+  this.name = result.name ? book.name : 'no name found';
+  this.description = result.description ? book.description : 'no description found';
+  this.url = result.url ? result.url[0] : 'no author found';
+  this.image = result.industryIdentifiers;
 }
 
 
