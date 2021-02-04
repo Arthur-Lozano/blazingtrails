@@ -34,42 +34,72 @@ const PORT = process.env.PORT || 3000;
 
 //routes
 // app.get('/index', homeHandler);
-// app.get('/', homePage);
-app.get('/', npsHandler)
+app.get('/', GHandler);
+// app.get('/', npsHandler);
 // app.get('/', searchHandler);
 
 
 
     //NPS API 
-    function npsHandler(request, response) {
-      // console.log(request.body);
-      // const searchQuery = request.body;
-      // console.log(request.body);
-      const key = process.env.npiKey;
-      let URL = `https://developer.nps.gov/api/v1/campgrounds?stateCode=wa&api_key=${key}`;
-      // if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
-      // if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
-      console.log('URL', URL);
-      superagent.get(URL)
-        .then(data => {
-          console.log('!!!!!3452552345435325345230530538405835435345353545345435');
-          console.log('!!!!!', data.body.data[0].name);
-          // const campGround = data.body.data;
-          const finalBookArray = data.body.data.map(campGround => new Camp(campGround));
-          response.render('index', { data: campGround });
-        });
+    // function npsHandler(request, response) {
+    //   // console.log(request.body);
+    //   // const searchQuery = request.body;
+    //   // console.log(request.body);
+    //   const key = process.env.npiKey;
+    //   let URL = `https://developer.nps.gov/api/v1/campgrounds?stateCode=wa&api_key=${key}`;
+    //   // if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
+    //   // if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
+    //   console.log('URL', URL);
+    //   superagent.get(URL)
+    //     .then(data => {
+    //       console.log('!!!!!3452552345435325345230530538405835435345353545345435');
+    //       console.log('!!!!!', data.body.data[0].name);
+    //       const campGround = data.body.data;
+    //       // const finalBookArray = data.body.data.map(campGround => new Camp(campGround));
+    //       response.render('index', { data: campGround });
+    //     });
     
-    }
+    // }
+
+ //Google API 
+ function GHandler(request, response) {
+  // console.log(request.body);
+  // const searchQuery = request.body;
+  // console.log(request.body);
+  let location = userInput;
+  const key = process.env.GAPI;
+  let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}=camping+in+${location}`;
+  // let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}=hiking+in+${location}`;
+
+  // if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
+  // if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
+  console.log('URL', URL);
+  superagent.get(URL)
+    .then(data => {
+      console.log('!!!!!3452552345435325345230530538405835435345353545345435');
+      console.log('!!!!!', data.body.data[0].name);
+      const campGround = data.body.data;
+      // const finalBookArray = data.body.data.map(campGround => new Camp(campGround));
+      response.render('index', { data: campGround });
+    });
+
+}
 
 
     //ADDED THIS TO PUSH
 //NPS Construtor
 
-function Camp(result) {
-  this.name = result.name ? book.name : 'no name found';
-  this.description = result.description ? book.description : 'no description found';
-  this.url = result.url ? result.url[0] : 'no author found';
-  this.image = result.industryIdentifiers;
-}
+// function Camp(result) {
+//   this.name = result.name ? book.name : 'no name found';
+//   this.description = result.description ? book.description : 'no description found';
+//   this.url = result.url ? result.url[0] : 'no author found';
+//   this.image = result.industryIdentifiers;
+// }
+
+
+app.listen(PORT, () => {
+  console.log(`App Listening on port: ${PORT}`);
+});
+
 
 
