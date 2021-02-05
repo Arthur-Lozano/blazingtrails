@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <%- include('layout/head') %>
+
+  
+
+
 </head>
 <body>
-  <ul>
-    <% data.forEach(campInfo=> { %>
-      <li><%= campInfo.name %> </li>
-      <% }) %>
-  </ul>
+  <div id="content">
+    <%- include('layout/navbar') %>
+    <div class="hero-container">
+      <div class="sidenav">
+        
+      </div>
+      <div class="reg-nav-section">
+        <div class="reg-nav-wrapper">
+          <a class="reg-nav-buttons" href="">Hiking</a>
+          <a class="reg-nav-buttons" href="">Camping</a>
+          <a class="reg-nav-buttons" href="">Saved</a>
+          <a class="reg-nav-buttons" href="">Team</a>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+   
+    
+    
+
+
+    
+  </div>
   
 </body>
 </html>
