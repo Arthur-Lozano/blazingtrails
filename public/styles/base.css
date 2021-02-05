@@ -19,9 +19,18 @@ a:link {
 @import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:800');
 
 body {
-	font-family: 'Alegreya Sans', sans-serif;
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size: 1.3vw;
 	overflow-x: hidden;
 }
+
+@media only screen and (max-width: 1420px) {
+  body {font-size: 19.2px;}
+}
+
+
+
+
 .nav {
 	height: 100%;
 	width: 0;
@@ -57,7 +66,7 @@ body {
 	font-size: 36px;
 }
 #content {
-	padding: 20px;
+	padding: 40px 20px 40px 20px;
 	transition: margin-left 0.7s;
 	overflow: hidden;
 	width: 100%;
@@ -74,7 +83,7 @@ body {
   z-index: -2;
   top: 0;
   left: 0;
-  background: linear-gradient(143deg, #f6fdfe, #bac8cc );
+  background: linear-gradient(143deg, #f6fdfe, #dfe8eb );
   background-size: 400% 400%;
 
   -webkit-animation: AnimationName 30s ease infinite;
@@ -102,19 +111,30 @@ body {
 
 
 .reg-nav-section{
-  padding-top: 30px;
+  padding-top: 42px;
+  padding-right: 30px;
   text-align: right;
 
   
 }
 
 .reg-nav-buttons{
-  margin-right: 20px;
+  margin-right: 40px;
+  color: #302415;
+
+}
+
+#logo-align{
+  margin-top: auto;
+
 }
 
 .sidenav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 80px; /* Set the width of the sidebar */
+  width: 72px; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: -1; /* Stay on top */
   top: 0; /* Stay at the top */
@@ -122,4 +142,38 @@ body {
   background-color: #302415; /* Black */
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 20px;
+  padding-bottom: 40px;
 }
+
+.main-content-contain{
+  width: 100%;
+  margin: auto;
+  max-width: 1440px;
+  min-height: 100vh;
+  padding: 9em 5em 7.3em 5em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+ 
+
+}
+
+.hero-left{
+  width: 600px;
+
+
+
+}
+
+.hero-right{
+
+
+}
+
+
+#hiking-hero{
+  width: 20em;
+}
+
+
