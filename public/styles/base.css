@@ -14,6 +14,8 @@ a:link {
 
 
 
+
+
 /*--------------------------------nav bar --------------------------------*/
 
 @import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:800');
@@ -21,13 +23,34 @@ a:link {
 body {
   font-family: 'Alegreya Sans', sans-serif;
   font-size: 1.3vw;
-	overflow-x: hidden;
+  overflow-x: hidden;
+  color: #20180d;
 }
 
 @media only screen and (max-width: 1420px) {
   body {font-size: 19.2px;}
+  .reg-nav-buttons{
+    display: none;
+  }
+
+
+  
 }
 
+
+
+h1{
+  font-size: 2.5em;
+  font-family: termina, sans-serif;
+  font-weight: 700;
+  margin-bottom: .2em;
+
+}
+
+p{
+  line-height: 1.4;
+  
+}
 
 
 
@@ -148,22 +171,31 @@ body {
 .main-content-contain{
   width: 100%;
   margin: auto;
-  max-width: 1440px;
-  min-height: 100vh;
-  padding: 9em 5em 7.3em 5em;
+  max-width: 1640px;
+  min-height: 80vh;
+  padding: 3em 5em 3em 5em;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
  
 
 }
 
 .hero-left{
   width: 600px;
+  margin: 30px;
 
 
 
+}
+
+.bar{
+  height: 15px;
+  width: 200px;
+  background-color: #f5d042;
+  margin-bottom: .7em;
 }
 
 .hero-right{
@@ -177,3 +209,53 @@ body {
 }
 
 
+
+/* ---------------------btns ----------------------*/
+.button-wrapper{
+  margin-top: .9em;
+
+}
+
+.solid-btn{
+  background-color:#302415;
+	border-radius: .2em;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	padding:16px 31px;
+  text-decoration:none;
+  border: 0px;
+  margin-right: 1em;
+  
+}
+
+
+.solid-btn:hover {
+	background-color:#523e25;
+}
+.solid-btn:active {
+	position:relative;
+	top:1px;
+}
+
+
+.outline-btn{
+  
+	border-radius: .2em;
+	display:inline-block;
+	cursor:pointer;
+	color:#302415;
+	padding: 13.5px 31px;
+  text-decoration:none;
+  border: 3px solid #302415;
+  
+}
+
+
+.outline-btn:hover {
+	background-color:#806748;
+}
+.outline-btn:active {
+	position:relative;
+	top:1px;
+}
