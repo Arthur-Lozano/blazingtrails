@@ -1,16 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <%- include('layout/head') %>
+
+  
+
+
 </head>
 <body>
-  <ul>
-    <% data.forEach(campInfo=> { %>
-      <li><%= campInfo.name %> </li>
-      <% }) %>
-  </ul>
+  <Header>
+
+  </Header>
+
+
+
+  <div id="content">
+    <%- include('layout/navbar') %>
+
+    <div class="hero-container">
+
+      <%- include('layout/sidenav') %>
+
+      <div class="main-content-contain">
+
+        <div class="hero-left">
+          <h1 class="">Let’s Find Adventure, Hiking, Camping and Beyond.</h1>
+          <div class="bar"></div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ommodo </p>
+          <div class="button-wrapper">
+            <a href="/search"><button class="solid-btn"> Search</button></a>
+            <button class="outline-btn"> Learn More</button>
+
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <img id="hiking-hero"src="../../img/Hiking_hero.png" alt="hiking hero">
+        </div>
+
+
+      </div>
+
+
+
+
+
+
+
+    </div>
+
+    
+  </div>
+
+  <footer>
+
+  </footer>
   
 </body>
 </html>
