@@ -36,7 +36,7 @@ const PORT = process.env.PORT || 3000;
 // app.get('/index', homeHandler);
 app.get('/', GHandler);
 // app.get('/', npsHandler);
-app.get('/weather', weatherHandler);
+// app.get('/weather', weatherHandler);
 
 
 
@@ -62,16 +62,16 @@ app.get('/weather', weatherHandler);
     // }
 
  //Weather API
- function weatherHandler(request, response) {
+ function weatherHandler(request, response, campArray) {
   let key = process.env.WEATHER_API_KEY;
   let city = 'seattle';
-  const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${key}&city=${city}&country=US
-  &days=8`;
-  // console.log('>>>>>', url);
+  const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${key}&city=${city}&country=US&days=8`;
+  console.log({url});
   superagent.get(url)
     .then(value => {
+      console.log({value});
       const weatherData = value.body.data.map(current => new Weather(current));
-      response.render('index', {yourweather: weatherData});
+      response.render('index', {weatherData, data:campArray});
     }).catch(error => {
       console.log('ERROR', error);
       response.status(500).send('So sorry, something went wrong.');
@@ -81,20 +81,16 @@ app.get('/weather', weatherHandler);
  //Google API 
  function GHandler(request, response) {
   let location = 'seattle';
-  const key = process.env.API_KEY;
-  let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}&query=camping+in+${location}`;
-  // let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}=hiking+in+${location}`;
+  let travelType = 'hiking';
+  // if (travelType === 'hiking' ? travelType = 'hiking':travelType='camping'); 
 
-  // if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
-  // if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
-  console.log('URL', URL);
+  const key = process.env.API_KEY;
+  let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}&query=${travelType}+in+${location}`;
+  // let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}=hiking+in+${location}`;
   superagent.get(URL)
     .then(data => {
-      console.log('!!!!!3452552345435325345230530538405835435345353545345435');
-      console.log('!!!!!key', data.body.results);
-      // const campGround = data.body.results;
       const campArray = data.body.results.map(campGround => new Google(campGround));
-      response.render('index', { data: campArray });
+      weatherHandler(request, response, campArray);
     });
 }
 
@@ -103,9 +99,8 @@ app.get('/weather', weatherHandler);
 //Google Constructor
 function Google(results) {
   this.name = results.name;
-  this.description = results.description;
+  this.types = results.types;
   this.business_status = results.business_status;
-  // this.hours = results.opening_hours.open_now;
   this.formatted_address = results.formatted_address;
   this.rating = results.rating;
   // this.geometry = results.geometry.location.lat;
