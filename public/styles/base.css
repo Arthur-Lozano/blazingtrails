@@ -1,0 +1,336 @@
+@import "reset.css";
+@import "layout.css";
+@import "modules.css";
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+
+
+
+
+/*--------------------------------nav bar --------------------------------*/
+
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:800');
+
+body {
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size: 1.3vw;
+  overflow-x: hidden;
+  color: #20180d;
+  
+  background: linear-gradient(143deg, #e2f6fa, #f6fdfe);
+  background-size: 400% 400%;
+
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+
+
+  }
+
+  @-webkit-keyframes AnimationName {
+      0%{background-position:1% 0%}
+      50%{background-position:99% 100%}
+      100%{background-position:1% 0%}
+  }
+  @-moz-keyframes AnimationName {
+      0%{background-position:1% 0%}
+      50%{background-position:99% 100%}
+      100%{background-position:1% 0%}
+  }
+  @keyframes AnimationName {
+      0%{background-position:1% 0%}
+      50%{background-position:99% 100%}
+      100%{background-position:1% 0%}
+  }
+
+/*-----------------------------background animation for body ----------------------*/
+
+
+button{
+  font-size: 1.3vw;
+}
+
+
+@media only screen and (min-width: 1920px) {
+  body {font-size: 23.2px;}
+
+  .tbd-main-img{
+    
+    background-position: 90% 10%;
+    background-size: 700px 616px; 
+    
+  }
+  
+}
+
+
+
+@media only screen and (max-width: 1400px) {
+
+  body {font-size: 19.2px;}
+
+  button{
+    font-size: 19.2px;
+  }
+  
+  .tbd-main-img{
+    
+    background-position: 70% 10%;
+    background-size: 700px 616px; 
+    
+  }
+
+}
+
+
+@media only screen and (max-width: 870px) {
+  
+  div.main-content-contain {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: normal;
+    flex-direction: column;
+    flex-wrap: nowrap; 
+  }
+
+  .reg-nav-buttons{
+    display: none;
+  }
+
+
+  .tbd-main-img{
+    
+    background-position: 70% 10%;
+    background-size: 700px 616px; 
+    
+  }
+
+}
+
+
+
+h1{
+  font-size: 2.5em;
+  font-family: termina, sans-serif;
+  font-weight: 700;
+  margin-bottom: .2em;
+
+}
+
+p{
+  line-height: 1.4;
+  
+}
+
+
+
+.nav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #302415;
+	overflow-x: hidden;
+	padding-top: 60px;
+	transition: 0.7s;
+}
+.nav a {
+	display: block;
+	padding: 40px 30px;
+	font-size: 25px;
+	text-decoration: none;
+	color: #ccc;
+}
+.nav a:hover {
+	color: #fff;
+	transition: 0.4s;
+}
+.nav .close {
+	position: absolute;
+	top: 0;
+	right: 22px;
+	margin-left: 50px;
+	font-size: 30px
+}
+.slide a {
+	color: #f3f3f3;
+	font-size: 36px;
+}
+#content {
+	padding: 40px 20px 40px 20px;
+	transition: margin-left 0.7s;
+	overflow: hidden;
+	width: 100%;
+}
+
+
+/*-----------------------------index page ----------------------*/
+
+
+.hero-container{
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: -2;
+  top: 0;
+  left: 0;
+  
+  
+  
+}
+
+
+
+
+.reg-nav-section{
+  padding-top: 42px;
+  padding-right: 30px;
+  text-align: right;
+
+  
+}
+
+.reg-nav-buttons{
+  margin-right: 40px;
+  color: #302415;
+
+}
+
+#logo-align{
+  margin-top: auto;
+
+}
+
+.sidenav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 72px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: -1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #302415; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.main-content-contain{
+  width: 100%;
+  margin: auto;
+  max-width: 1640px;
+  min-height: 100vh;
+  padding: 3em 5em 3em 5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  
+  
+
+ 
+
+}
+
+
+
+
+
+.hero-left{
+  width: 600px;
+  margin: 30px;
+
+
+
+}
+
+.bar{
+  height: 15px;
+  width: 200px;
+  background-color: #f5d042;
+  margin-bottom: .7em;
+}
+
+.hero-right{
+
+
+}
+
+
+#hiking-hero{
+  display: block;
+  width: 20em;
+  margin: auto;
+}
+
+
+
+/* ---------------------btns ----------------------*/
+.button-wrapper{
+  margin-top: 1.5em;
+  margin-bottom: 2em;
+
+}
+
+.solid-btn{
+  background-color:#302415;
+	border-radius: .2em;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	padding:16px 31px;
+  text-decoration:none;
+  border: 0px;
+  margin-right: 1em;
+ 
+  
+  
+}
+
+
+.solid-btn:hover {
+  background-color:#f5d042;
+  color:#302415;
+  border: 0px;
+}
+.solid-btn:active {
+	position:relative;
+  top:1px;
+  border: 0px;
+}
+
+
+.outline-btn{
+  
+	border-radius: .2em;
+	display:inline-block;
+	cursor:pointer;
+	color:#302415;
+	padding: 13px 31px;
+  text-decoration:none;
+  border: 4px solid #302415;
+
+}
+
+
+.outline-btn:hover {
+	background-color:#f5d042;
+}
+.outline-btn:active {
+	position:relative;
+	top:1px;
+}
