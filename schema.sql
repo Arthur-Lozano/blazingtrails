@@ -1,19 +1,17 @@
 DROP TABLE IF EXISTS hiking;
 CREATE TABLE hiking (
   id SERIAL PRIMARY KEY,
-  center VARCHAR(350),
-  rating VARCHAR(20),
-  zoom INTEGER,
-  location_name VARCHAR(100)
+  name VARCHAR(350),
+  rating VARCHAR(100),
+  formatted_address VARCHAR(100),
+  description VARCHAR(350)
 );
 
 DROP TABLE IF EXISTS camping;
 CREATE TABLE camping (
   id SERIAL PRIMARY KEY,
-  center VARCHAR(350),
-  rating VARCHAR(20),
-  zoom INTEGER,
-  location_name VARCHAR(100)
+  name VARCHAR(350),
+  rating VARCHAR(100),
+  formatted_address VARCHAR(100),
+  description VARCHAR(350)
 );
-
-/* database name = blazingdata */

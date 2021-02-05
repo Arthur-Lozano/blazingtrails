@@ -1,0 +1,32 @@
+<html lang="en">
+
+<head>
+  <%- include('layout/header') %>
+</head>
+
+<body>
+  <div>
+    <%- include('layout/navbar') %>
+    <h2>TITLE HERE</h2>
+    <div id="name">
+      <label for="name">Location Name</label>
+      <input type="text" id="name" value="name" name="keyword">
+    </div>
+    <form action="/TBD" method="POST">
+      <div id="TBD">
+        <input type="text" name="search" id="" placeholder="Enter a location for camping or hiking">
+        <div id="hiking">
+          <label for="hiking">Hiking</label>
+          <input type="radio" id="hiking" value="hiking" name="keyword">
+        </div>
+        <div id="camping">
+          <label for="camping">Camping</label>
+          <input type="radio" id="camping" value="camping" name="keyword">
+        </div>
+      </div>
+      <input type="submit" value="Enter for Adventure!">
+    </form>
+    <%- include('layout/footer') %>
+  </div>
+</body>
+</html>
