@@ -35,6 +35,10 @@ const PORT = process.env.PORT || 3000;
 // app.get('/index', homeHandler);
 // app.get('/', homePage);
 app.get('/', npsHandler)
+app.get('/search', (request, response)=>{
+  response.render('pages/pick/tbd');
+
+});
 // app.get('/', searchHandler);
 
 

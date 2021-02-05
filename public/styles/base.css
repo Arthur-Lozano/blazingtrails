@@ -59,21 +59,36 @@ button{
   font-size: 1.3vw;
 }
 
-@media only screen and (max-width: 1200px) {
+
+@media only screen and (min-width: 1920px) {
+  body {font-size: 23.2px;}
+
+  .tbd-main-img{
+    
+    background-position: 90% 10%;
+    background-size: 700px 616px; 
+    
+  }
+  
+}
+
+
+
+@media only screen and (max-width: 1400px) {
 
   body {font-size: 19.2px;}
-
-  .reg-nav-buttons{
-    display: none;
-  }
 
   button{
     font-size: 19.2px;
   }
   
-  
+  .tbd-main-img{
+    
+    background-position: 70% 10%;
+    background-size: 700px 616px; 
+    
+  }
 
-  
 }
 
 
@@ -86,13 +101,20 @@ button{
     align-items: normal;
     flex-direction: column;
     flex-wrap: nowrap; 
+  }
+
+  .reg-nav-buttons{
+    display: none;
+  }
+
+
+  .tbd-main-img{
     
+    background-position: 70% 10%;
+    background-size: 700px 616px; 
     
   }
 
-  
-
-  
 }
 
 
@@ -166,6 +188,7 @@ p{
   left: 0;
   
   
+  
 }
 
 
@@ -223,6 +246,10 @@ p{
 
 }
 
+
+
+
+
 .hero-left{
   width: 600px;
   margin: 30px;
@@ -254,7 +281,7 @@ p{
 
 /* ---------------------btns ----------------------*/
 .button-wrapper{
-  margin-top: .9em;
+  margin-top: 1.5em;
   margin-bottom: 2em;
 
 }

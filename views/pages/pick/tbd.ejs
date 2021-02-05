@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../../layout/head') %>
+
+  
+
+
+</head>
+<body>
+  <Header>
+
+  </Header>
+
+
+
+  <div id="content">
+    <%- include('../../layout/navbar') %>
+
+    <div class="hero-container">
+
+      <%- include('../../layout/sidenav') %>
+
+
+      <div class="tbd-main-img">
+        <div class="info-wrapper">
+          <h1>Search</h1>
+          <p>Type in a City or State then choose between camping and hinking. From there you will be taken to your results where you can save to recall later</p>
+
+        </div>
+
+      </div>
+
+
+
+
+      <div class="form-wrapper">
+
+        <div class="form-contain">
+  
+          <form action="/search" method="POST">
+            <div class="fieldset-wrapper">
+  
+              <input class="box-size" type="text" name="search" placeholder="Enter a city or" required>
+              <fieldset>
+                <div id="selec" class="box-size">
+                  <label for="Camping">
+                    <span>Camping</span>
+                    <input type="radio" name="search" value="camping" required>
+                  </label>
+                </div>
+              </fieldset>
+              <fieldset>
+                <div id="selec" class="box-size">
+                  <label for="Hiking">
+                    <span>Hiking</span>
+                    <input type="radio" name="search" value="hiking" required>
+                  </label>
+      
+                </div>
+              </fieldset>
+            </div>
+            <div class="button-wrapper">
+              <button class="solid-btn"> Camping</button>
+              <button class="solid-btn"> Hiking</button>
+              
+  
+            </div>
+  
+          </form>
+
+        </div>
+
+
+        
+
+
+      </div>
+
+
+
+
+
+
+
+    </div>
+
+
+   
+    
+    
+
+
+    
+  </div>
+
+  <footer>
+    
+  </footer>
+  
+</body>
+</html>

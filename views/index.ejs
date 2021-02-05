@@ -8,22 +8,18 @@
 
 </head>
 <body>
+  <Header>
+
+  </Header>
+
+
+
   <div id="content">
     <%- include('layout/navbar') %>
+
     <div class="hero-container">
 
-      <div class="sidenav">
-        <img id="logo-align"src="../../img/blazingTrailsLogo.png" alt="Blazing Trails Logo">
-      </div>
-
-      <div class="reg-nav-section">
-        <div class="reg-nav-wrapper">
-          <a class="reg-nav-buttons" href="#">Hiking</a>
-          <a class="reg-nav-buttons" href="#">Camping</a>
-          <a class="reg-nav-buttons" href="#">Saved</a>
-          <a class="reg-nav-buttons" href="#">Team</a>
-        </div>
-      </div>
+      <%- include('layout/sidenav') %>
 
       <div class="main-content-contain">
 
@@ -32,7 +28,7 @@
           <div class="bar"></div>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ommodo </p>
           <div class="button-wrapper">
-            <button class="solid-btn"> Search</button>
+            <a href="/search"><button class="solid-btn"> Search</button></a>
             <button class="outline-btn"> Learn More</button>
 
           </div>
@@ -41,9 +37,6 @@
         <div class="hero-right">
           <img id="hiking-hero"src="../../img/Hiking_hero.png" alt="hiking hero">
         </div>
-
-
-
 
 
       </div>
@@ -64,6 +57,10 @@
 
     
   </div>
+
+  <footer>
+
+  </footer>
   
 </body>
 </html>
