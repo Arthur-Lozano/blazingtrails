@@ -20,7 +20,7 @@ app.use(methodOverride('_method'));
 // declare port for server
 const PORT = process.env.PORT || 3000;
 //routes
-// app.get('/index', homeHandler);
+// app.get('/results-info', iHandler);
 app.get('/', homeHandler);
 app.post('/search', GHandler);//posting new information to server/search route
 
@@ -31,19 +31,20 @@ app.post('/search', GHandler);//posting new information to server/search route
       // console.log(request.body);
       // const searchQuery = request.body;
       // console.log(request.body);
-      let city = 'seattle';
+      let location = request.body.city;
       const key = process.env.IQKey;
-      let URL = `http://api.airvisual.com/v2/city?city=${city}&state=Washington&country=USA&key=${key}`;
+      let URL = `http://api.airvisual.com/v2/city?city=${location}&state=Washington&country=USA&key=${key}`;
+      console.log(URL)
       // if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
       // if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
       superagent.get(URL)
         .then(data => {
-          const campGround = data.body.data;
-          // const finalBookArray = data.body.data.map(campGround => new Camp(campGround));
-          response.render('index', { weatherData, data:campArray, data:weatherArr });
+          const airQ = data.body.data.current.pollution;
+          console.log(airQ)
+          const yourAir = new Quality(airQ);
+          response.render('results/results-info.ejs', { request, response, campArray, weatherData, yourAir });
         });
     }
-
     // request.body.city
     // request.body.search
 
@@ -56,9 +57,8 @@ function homeHandler (request, response) {
  //Weather API
  function weatherHandler(request, response, campArray) {
   let key = process.env.WEATHER_API_KEY;
-  let city = 'seattle';
-  const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${key}&city=${city}&country=US&days=8`;
-  console.log({url});
+  let location = request.body.city;
+  const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${key}&city=${location}&country=US&days=8`;
   superagent.get(url)
     .then(value => {
       const weatherData = value.body.data.map(current => new Weather(current));
@@ -101,22 +101,17 @@ function Weather(result) {
   this.time = new Date(result.ts * 1000).toDateString();
   this.forecast = result.weather.description;
 }
-    //ADDED THIS TO PUSH
 
-    // "pollution": {
-    //   "ts": "2021-02-06T06:00:00.000Z",
-    //   "aqius": 67,
-    //   "mainus": "p2",
-    //   "aqicn": 28,
-    //   "maincn": "p2"
+
 //Iq Construtor
-function Iq(result) {
-  this.ts = result.data.ts;
-  this.aqius = result.data.aqius;
-  this.mainus = result.data.mainus;
-  this.aqicn = result.data.aqicn;
-  this.maincn = result.data.maincn;
+function Quality(result) {
+  this.ts = result.ts;
+  this.aqius = result.aqius;
+  this.mainus = result.mainus;
+  this.aqicn = result.aqicn;
+  this.maincn = result.maincn;
 }
+
 app.listen(PORT, () => {
   console.log(`App Listening on port: ${PORT}`);
 });
