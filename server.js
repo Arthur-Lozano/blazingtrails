@@ -21,63 +21,38 @@ app.use(methodOverride('_method'));
 const PORT = process.env.PORT || 3000;
 //routes
 // app.get('/index', homeHandler);
-app.get('/', GHandler);
-<<<<<<< HEAD
-// app.get('/', npsHandler);
-// app.get('/', searchHandler);
-=======
+app.get('/', homeHandler);
+app.post('/search', GHandler);//posting new information to server/search route
 
 // app.get('/', npsHandler);
 // app.get('/weather', weatherHandler);
->>>>>>> a7b6c9c1be53ccabe37ee1507e733bbd2bd4aa5f
+    // IQAIR API 
+    function iHandler(request, response, campArray, weatherData) {
+      // console.log(request.body);
+      // const searchQuery = request.body;
+      // console.log(request.body);
+      let city = 'seattle';
+      const key = process.env.IQKey;
+      let URL = `http://api.airvisual.com/v2/city?city=${city}&state=Washington&country=USA&key=${key}`;
+      // if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
+      // if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
+      superagent.get(URL)
+        .then(data => {
+          const campGround = data.body.data;
+          // const finalBookArray = data.body.data.map(campGround => new Camp(campGround));
+          response.render('index', { weatherData, data:campArray, data:weatherArr });
+        });
+    }
 
+    // request.body.city
+    // request.body.search
 
+//Home Handler
 
-    //NPS API 
-    // function npsHandler(request, response) {
-    //   // console.log(request.body);
-    //   // const searchQuery = request.body;
-    //   // console.log(request.body);
-    //   const key = process.env.npiKey;
-    //   let URL = `https://developer.nps.gov/api/v1/campgrounds?stateCode=wa&api_key=${key}`;
-    //   // if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
-    //   // if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
-    //   console.log('URL', URL);
-    //   superagent.get(URL)
-    //     .then(data => {
-    //       console.log('!!!!!3452552345435325345230530538405835435345353545345435');
-    //       console.log('!!!!!', data.body.data[0].name);
-    //       const campGround = data.body.data;
-    //       // const finalBookArray = data.body.data.map(campGround => new Camp(campGround));
-    //       response.render('index', { data: campGround });
-    //     });
-    
-    // }
+function homeHandler (request, response) {
+  response.render('pages/pick/tbd')
+}
 
-<<<<<<< HEAD
- //Google API 
- function GHandler(request, response) {
-  // console.log(request.body);
-  // const searchQuery = request.body;
-  // console.log(request.body);
-  let location = userInput;
-  const key = process.env.GAPI;
-  let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}=camping+in+${location}`;
-  // let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}=hiking+in+${location}`;
-
-  // if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
-  // if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
-  console.log('URL', URL);
-  superagent.get(URL)
-    .then(data => {
-      console.log('!!!!!3452552345435325345230530538405835435345353545345435');
-      console.log('!!!!!', data.body.data[0].name);
-      const campGround = data.body.data;
-      // const finalBookArray = data.body.data.map(campGround => new Camp(campGround));
-      response.render('index', { data: campGround });
-    });
-
-=======
  //Weather API
  function weatherHandler(request, response, campArray) {
   let key = process.env.WEATHER_API_KEY;
@@ -86,99 +61,19 @@ app.get('/', GHandler);
   console.log({url});
   superagent.get(url)
     .then(value => {
-      console.log({value});
       const weatherData = value.body.data.map(current => new Weather(current));
-      response.render('index', {weatherData, data:campArray});
-    }).catch(error => {
-      console.log('ERROR', error);
-      response.status(500).send('So sorry, something went wrong.');
-    });
->>>>>>> a7b6c9c1be53ccabe37ee1507e733bbd2bd4aa5f
-}
-
- //Google API 
- function GHandler(request, response) {
-  let location = 'seattle';
-  let travelType = 'hiking';
-  // if (travelType === 'hiking' ? travelType = 'hiking':travelType='camping'); 
-
-  const key = process.env.API_KEY;
-  let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}&query=${travelType}+in+${location}`;
-  // let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}=hiking+in+${location}`;
-  superagent.get(URL)
-    .then(data => {
-      const campArray = data.body.results.map(campGround => new Google(campGround));
-      weatherHandler(request, response, campArray);
-    });
-}
-
-
-
-//Google Constructor
-function Google(results) {
-  this.name = results.name;
-  this.types = results.types;
-  this.business_status = results.business_status;
-  this.formatted_address = results.formatted_address;
-  this.rating = results.rating;
-  // this.geometry = results.geometry.location.lat;
-  // this.geometry = results.geometry.location.lng;
-  // this.photos = results.photos.photo_reference;
-}
-
-//Weather Constructor
-
-function Weather(result) {
-  this.time = new Date(result.ts * 1000).toDateString();
-  this.forecast = result.weather.description;
-}
-
-
-// app.get('/search', (request, respsone)=>{
-//   response.render('pages/pick/tbd');
-    
-// });
-// app.get('/', npsHandler);
-// app.get('/weather', weatherHandler);
-    //NPS API 
-    // function npsHandler(request, response) {
-    //   // console.log(request.body);
-    //   // const searchQuery = request.body;
-    //   // console.log(request.body);
-    //   const key = process.env.npiKey;
-    //   let URL = `https://developer.nps.gov/api/v1/campgrounds?stateCode=wa&api_key=${key}`;
-    //   // if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
-    //   // if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
-    //   console.log('URL', URL);
-    //   superagent.get(URL)
-    //     .then(data => {
-    //       console.log('!!!!!3452552345435325345230530538405835435345353545345435');
-    //       console.log('!!!!!', data.body.data[0].name);
-    //       const campGround = data.body.data;
-    //       // const finalBookArray = data.body.data.map(campGround => new Camp(campGround));
-    //       response.render('index', { data: campGround });
-    //     });
-    // }
- //Weather API
- function weatherHandler(request, response, campArray) {
-  let key = process.env.WEATHER_API_KEY;
-  let city = 'seattle';
-  const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${key}&city=${city}&country=US&days=8`;
-  console.log({url});
-  superagent.get(url)
-    .then(value => {
-      console.log({value});
-      const weatherData = value.body.data.map(current => new Weather(current));
-      response.render('index', {weatherData, data:campArray});
+      iHandler(request, response, campArray, weatherData);//render once for EACH route
     }).catch(error => {
       console.log('ERROR', error);
       response.status(500).send('So sorry, something went wrong.');
     });
 }
+
+
  //Google API 
  function GHandler(request, response) {
-  let location = 'seattle';
-  let travelType = 'hiking';
+  let location = request.body.city;
+  let travelType = request.body.search;
   // if (travelType === 'hiking' ? travelType = 'hiking':travelType='camping'); 
   const key = process.env.API_KEY;
   let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}&query=${travelType}+in+${location}`;
@@ -189,6 +84,8 @@ function Weather(result) {
       weatherHandler(request, response, campArray);
     });
 }
+
+
 //Google Constructor
 function Google(results) {
   this.name = results.name;
@@ -196,29 +93,30 @@ function Google(results) {
   this.business_status = results.business_status;
   this.formatted_address = results.formatted_address;
   this.rating = results.rating;
-  // this.geometry = results.geometry.location.lat;
-  // this.geometry = results.geometry.location.lng;
-  // this.photos = results.photos.photo_reference;
 }
+
+
 //Weather Constructor
 function Weather(result) {
   this.time = new Date(result.ts * 1000).toDateString();
   this.forecast = result.weather.description;
 }
     //ADDED THIS TO PUSH
-//NPS Construtor
 
-// function Camp(result) {
-//   this.name = result.name ? book.name : 'no name found';
-//   this.description = result.description ? book.description : 'no description found';
-//   this.url = result.url ? result.url[0] : 'no author found';
-//   this.image = result.industryIdentifiers;
-// }
-
-app.listen(PORT, () => {
-  console.log(`App Listening on port: ${PORT}`);
-});
-
+    // "pollution": {
+    //   "ts": "2021-02-06T06:00:00.000Z",
+    //   "aqius": 67,
+    //   "mainus": "p2",
+    //   "aqicn": 28,
+    //   "maincn": "p2"
+//Iq Construtor
+function Iq(result) {
+  this.ts = result.data.ts;
+  this.aqius = result.data.aqius;
+  this.mainus = result.data.mainus;
+  this.aqicn = result.data.aqicn;
+  this.maincn = result.data.maincn;
+}
 app.listen(PORT, () => {
   console.log(`App Listening on port: ${PORT}`);
 });
