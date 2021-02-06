@@ -1,0 +1,284 @@
+
+
+
+
+/* --------------------- form on pick tbd.ejs page --------------------*/
+
+.form-contain{
+  width: 100%;
+  margin: auto;
+  padding: 2em 1em .2em 1em;
+  
+}
+
+.box-size{
+  width: 100%;
+  height: 50px;
+}
+
+
+#selec{
+  margin-left: 20px;
+  display: inline-block;
+  width: 50%;
+  height: 50px;
+}
+
+.fieldset-wrapper{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background-color: #c6dfe4;
+ 
+}
+
+
+.form-wrapper{
+  border: 0px;
+  border-radius: .4em;  
+  background-color: #c6dfe4;
+  max-width: 80%;
+  margin: 1em auto 1em auto;
+}
+
+.tbd-main-img{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 300px;
+  border: 0px;
+  border-radius: .4em;  
+  background-color: #c6dfe4;
+  max-width: 80%;
+  margin: 5em auto 3em auto;
+  background-image: url('../../img/mountain.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 100% 10%;
+  background-size: 700px 616px; 
+  padding: 1em;
+  
+}
+
+
+.info-wrapper{
+  width: 50%;
+  height: 200px;
+  background-color: white;
+  padding: 1em;
+  border: 0px;
+  border-radius: .4em; 
+}
+
+/* TEAM BIO CSS */
+
+.bioHeader {
+  display: flex;
+  align-items: center;
+  margin-left: 200px;
+}
+
+
+/* ARTHUR BIO */
+.arthurImg-wrapper {
+  position: absolute;right:30%;
+  width: 315px;
+  height: 345px;
+}
+.arthurImg {
+  width: 200%;
+  height: 100%
+}
+.bio-wrapper-A{
+  width: 50%;
+  height: 400px;
+  background-color: white;
+  padding: 1em;
+  border: 0px;
+  border-radius: .4em; 
+}
+.tbd-main-img-bio-A{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 500px;
+  border: 0px;
+  border-radius: .4em;  
+  background-color: #c6dfe4;
+  max-width: 80%;
+  margin: 2em auto 3em auto; 
+  padding: 1em;
+}
+
+/* TEK BIO */
+.tekImg-wrapper {
+  position: absolute;right:30%;
+  width: 315px;
+  height: 345px;
+}
+.tekImg {
+  width: 200%;
+  height: 100%
+}
+.bio-wrapper-T{
+  width: 50%;
+  height: 400px;
+  background-color: white;
+  padding: 1em;
+  border: 0px;
+  border-radius: .4em;
+}
+.tbd-main-img-bio-T{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 500px;
+  border: 0px;
+  border-radius: .4em;  
+  background-color: #c6dfe4;
+  max-width: 80%;
+  margin: 2em auto 3em auto; 
+  padding: 1em;
+}
+
+/* RYAN BIO */
+.ryanImg-wrapper {
+  position: absolute;right:30%;
+  width: 315px;
+  height: 345px;
+}
+.ryanImg {
+  width: 200%;
+  height: 100%
+}
+.bio-wrapper-R{
+  width: 50%;
+  height: 400px;
+  background-color: white;
+  padding: 1em;
+  border: 0px;
+  border-radius: .4em; 
+}
+.tbd-main-img-bio-R{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 500px;
+  border: 0px;
+  border-radius: .4em;  
+  background-color: #c6dfe4;
+  max-width: 80%;
+  margin: 2em auto 3em auto; 
+  padding: 1em;
+}
+
+
+
+
+
+
+
+.results-main-contain{
+  padding: 8.5em 10vw 3em 10vw;
+  min-height: 60vw;
+
+}
+
+.list{
+  display: flex;
+  margin-top: 2em;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: stretch;
+
+}
+
+
+.res-item{
+  width: 39.2vw;
+  padding-bottom: 1.3em;
+}
+
+.res-link{
+
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  border-top-left-radius: 0.6em;
+  border-top-right-radius: 0.6em;
+  border-bottom-left-radius: 0.6em;
+  border-bottom-right-radius: 0.6em;
+  background-color: #c6dfe4;
+  color: hsla(216.00000000000014, 0.00%, 100.00%, 1.00);
+  
+}
+
+
+.res-img-wrapper{
+  position: relative;
+  overflow: hidden;
+  border-top-left-radius: 0.6em;
+  border-top-right-radius: 0.6em;
+}
+
+.res-photo{
+  height: 300px;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  z-index: 3;
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: repeat;
+}
+
+
+.res-img-fill{
+  display: inline-block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+}
+
+.res-contents{
+  display: flex;
+  padding-top: 2.1em;
+  padding-right: 2.2em;
+  padding-bottom: 2.1em;
+  padding-left: 2.2em;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+
+}
+
+.cont-line-one{
+  display: flex;
+  margin-top: 1em;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+.cont{
+  display: flex;
+  margin-right: 1.6em;
+  justify-content: flex-start;
+  align-items: center;
+  color: hsla(246.66666666666663, 3.61%, 48.82%, 1.00);
+  font-weight: 400;
+}
+
+.icon{
+  width: 1em;
+  margin-right: 0.5em;
+  max-width: 100%;
+}
+

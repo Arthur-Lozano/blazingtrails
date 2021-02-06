@@ -20,33 +20,30 @@ app.use(methodOverride('_method'));
 // declare port for server
 const PORT = process.env.PORT || 3000;
 //routes
-// app.get('/results-info', iHandler);
 app.get('/', homeHandler);
 app.post('/search', GHandler);//posting new information to server/search route
 
-// app.get('/', npsHandler);
-// app.get('/weather', weatherHandler);
-    // IQAIR API
+    // IQAIR API 
     function iHandler(request, response, campArray, weatherData) {
-      // console.log(request.body);
-      // const searchQuery = request.body;
-      // console.log(request.body);
       let location = request.body.city;
       const key = process.env.IQKey;
       let URL = `http://api.airvisual.com/v2/city?city=${location}&state=Washington&country=USA&key=${key}`;
       console.log(URL)
-      // if (searchType === 'title') { URL += `+intitle:${searchQuery}`; }
-      // if (searchType === 'author') { URL += `+inauthor:${searchQuery}`; }
       superagent.get(URL)
         .then(data => {
           const airQ = data.body.data.current.pollution;
           console.log(airQ)
           const yourAir = new Quality(airQ);
-          response.render('search', { request, response, campArray, weatherData, yourAir });
+          response.render('pages/results/results-info', { request, response, campArray, weatherData, yourAir });
         });
     }
-    // request.body.city
-    // request.body.search
+
+          const campGround = data.body.data;
+          // const finalBookArray = data.body.data.map(campGround => new Camp(campGround));
+          response.render('index', { weatherData, data:campArray, data:weatherArr });
+        });
+    }
+
 
 //Home Handler
 
@@ -70,11 +67,12 @@ function homeHandler (request, response) {
 }
 
 
- //Google API
+
+ //Google API 
  function GHandler(request, response) {
   let location = request.body.city;
   let travelType = request.body.search;
-  // if (travelType === 'hiking' ? travelType = 'hiking':travelType='camping');
+  // if (travelType === 'hiking' ? travelType = 'hiking':travelType='camping'); 
   const key = process.env.API_KEY;
   let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}&query=${travelType}+in+${location}`;
   // let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}=hiking+in+${location}`;
@@ -103,6 +101,7 @@ function Weather(result) {
 }
 
 
+
 //Iq Construtor
 function Quality(result) {
   this.ts = result.ts;
@@ -111,6 +110,8 @@ function Quality(result) {
   this.aqicn = result.aqicn;
   this.maincn = result.maincn;
 }
+
+
 
 app.listen(PORT, () => {
   console.log(`App Listening on port: ${PORT}`);
