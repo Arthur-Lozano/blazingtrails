@@ -64,11 +64,11 @@ button{
   body {font-size: 23.2px;}
 
   .tbd-main-img{
-    
     background-position: 90% 10%;
     background-size: 700px 616px; 
-    
   }
+
+  
   
 }
 
@@ -83,11 +83,32 @@ button{
   }
   
   .tbd-main-img{
-    
     background-position: 70% 10%;
     background-size: 700px 616px; 
-    
   }
+
+  .res-item{
+    width: 44vw;
+    padding-bottom: 2.5vw;
+  }
+
+  .res-contents{
+    padding-top: 1.5em;
+    padding-right: 1.2em;
+    padding-bottom: 1.5em;
+    padding-left: 1.2em;
+  
+  }
+
+  .cont-line-one{
+    display: block;
+    margin-top: 0.9em;
+  }
+
+  .cont{
+    margin-top: 0.7em;
+  }
+
 
 }
 
@@ -109,10 +130,13 @@ button{
 
 
   .tbd-main-img{
-    
     background-position: 70% 10%;
     background-size: 700px 616px; 
-    
+  }
+
+  .res-item{
+    width: 100%;
+    padding-bottom: 5vw;
   }
 
 }
@@ -125,6 +149,19 @@ h1{
   font-weight: 700;
   margin-bottom: .2em;
 
+}
+
+h2{
+  font-size: 1.5em;
+  font-family: termina, sans-serif;
+  font-weight: 700;
+}
+
+h6{
+  font-size: 1em;
+  font-family: termina, sans-serif;
+  font-weight: 700;
+  color: #302415;
 }
 
 p{
