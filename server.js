@@ -23,36 +23,33 @@ const PORT = process.env.PORT || 3000;
 app.get('/', homeHandler);
 app.post('/search', GHandler);//posting new information to server/search route
 
-    // IQAIR API 
-    function iHandler(request, response, campArray, weatherData) {
-      let location = request.body.city;
-      const key = process.env.IQKey;
-      let URL = `http://api.airvisual.com/v2/city?city=${location}&state=Washington&country=USA&key=${key}`;
-      console.log(URL)
-      superagent.get(URL)
-        .then(data => {
-          const airQ = data.body.data.current.pollution;
-          console.log(airQ)
-          const yourAir = new Quality(airQ);
-          response.render('pages/results/results-info', { request, response, campArray, weatherData, yourAir });
-        });
-    }
+// IQAIR API 
+function iHandler(request, response, campArray, weatherData) {
+  let location = request.body.city;
+  const key = process.env.IQKey;
+  let URL = `http://api.airvisual.com/v2/city?city=${location}&state=Washington&country=USA&key=${key}`;
+  console.log(URL)
+  superagent.get(URL)
+    .then(data => {
+      const airQ = data.body.data.current.pollution;
+      console.log(airQ)
+      const yourAir = new Quality(airQ);
+      response.render('pages/results/results-info', { request, response, campArray, weatherData, yourAir });
+    });
+}
 
-          const campGround = data.body.data;
-          // const finalBookArray = data.body.data.map(campGround => new Camp(campGround));
-          response.render('index', { weatherData, data:campArray, data:weatherArr });
-        });
-    }
+    
+
 
 
 //Home Handler
 
-function homeHandler (request, response) {
+function homeHandler(request, response) {
   response.render('pages/pick/tbd')
 }
 
- //Weather API
- function weatherHandler(request, response, campArray) {
+//Weather API
+function weatherHandler(request, response, campArray) {
   let key = process.env.WEATHER_API_KEY;
   let location = request.body.city;
   const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${key}&city=${location}&country=US&days=8`;
@@ -68,8 +65,8 @@ function homeHandler (request, response) {
 
 
 
- //Google API 
- function GHandler(request, response) {
+//Google API 
+function GHandler(request, response) {
   let location = request.body.city;
   let travelType = request.body.search;
   // if (travelType === 'hiking' ? travelType = 'hiking':travelType='camping'); 
