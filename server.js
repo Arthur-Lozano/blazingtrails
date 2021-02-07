@@ -91,6 +91,7 @@ function getCamping(request, response) {
 }
 
 
+
 // IQAIR API 
 function iHandler(request, response, campArray, weatherData) {
   let location = request.body.city;
@@ -100,6 +101,7 @@ function iHandler(request, response, campArray, weatherData) {
   superagent.get(URL)
     .then(data => {
       const airQ = data.body.data.current.pollution;
+      console.log(airQ)
       const yourAir = new Quality(airQ);
       response.render('pages/results/results-info', { request, response, campArray, weatherData, yourAir });
     });
