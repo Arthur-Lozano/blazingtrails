@@ -8,20 +8,89 @@ const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
 const methodOverride = require('method-override');
+
 // Database Connection Setup
-// const client = new pg.Client(process.env.DATABASE_URL);
-// client.on('error', err => { throw err; });
+const client = new pg.Client(process.env.DATABASE_URL);
+client.on('error', err => { throw err; });
+
 // Step 2:  Set up our application
 app.use(cors());
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+
 // declare port for server
 const PORT = process.env.PORT || 3000;
+
 //routes
 app.get('/', homeHandler);
 app.post('/search', GHandler);//posting new information to server/search route
+
+//DB Routes
+app.get('/hiking/:hiking_id', getHiking);
+app.get('/camping/:camping_id', getCamping);
+app.post('/results', )
+
+
+
+function addHiking(request, response) {
+  const {name, types, business_status, formatted_address, rating } = request.body;
+  const sql = 'INSERT INTO hiking (name, types, business_status, formatted_address, rating) VALUES ($1,$2,$3,$4,$5);';
+  const safeValues = [name, types, business_status, formatted_address, rating];
+  client.query(sql, safeValues)
+    .then(() => {
+      console.log(`${name} added to your favorites!`);
+      response.redirect(`pages/searches/search`);
+    }).catch((error) => {
+      console.log(error);
+      response.render('pages/error');
+    });
+}
+
+function addCamping(request, response) {
+  const { name, types, business_status, formatted_address, rating} = request.body;
+  const sql = 'INSERT INTO camping (name, types, business_status, formatted_address, rating) VALUES ($1,$2,$3,$4,$5);';
+  const safeValues = [name, types, business_status, formatted_address, rating];
+  client.query(sql, safeValues)
+    .then(() => {
+      console.log(`${name} added to your favorites!`);
+      response.redirect(`pages/searches/search`);
+    }).catch((error) => {
+      console.log(error);
+      response.render('pages/error');
+    });
+}
+
+function getHiking(request, response) {
+  const sql = 'SELECT * FROM hiking;';
+   client.query(sql)
+    .then(results => {
+      console.log(results.rows);
+      let data = results.rows;
+      response.status(200).render('pages/favorites/favorites', {data});
+    })
+    .catch((error) => {
+      console.log(error);
+      response.render('pages/error');
+    });
+}
+
+function getCamping(request, response) {
+  const sql = 'SELECT * FROM camping;';
+   client.query(sql)
+    .then(results => {
+      console.log(results.rows);
+      let data = results.rows;
+      response.status(200).render('pages/favorites/favorites', {data});
+    })
+    .catch((error) => {
+      console.log(error);
+      response.render('pages/error');
+    });
+}
+
+
 
 // IQAIR API 
 function iHandler(request, response, campArray, weatherData) {
@@ -69,10 +138,8 @@ function weatherHandler(request, response, campArray) {
 function GHandler(request, response) {
   let location = request.body.city;
   let travelType = request.body.search;
-  // if (travelType === 'hiking' ? travelType = 'hiking':travelType='camping'); 
   const key = process.env.API_KEY;
   let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}&query=${travelType}+in+${location}`;
-  // let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}=hiking+in+${location}`;
   superagent.get(URL)
     .then(data => {
       const campArray = data.body.results.map(campGround => new Google(campGround));
