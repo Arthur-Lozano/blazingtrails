@@ -175,9 +175,6 @@
 
 
 
-
-
-
 .results-main-contain{
   padding: 8.5em 10vw 3em 10vw;
   min-height: 60vw;
@@ -362,4 +359,24 @@
 
 #seperator{
   margin-bottom: 5em;
+}
+
+.map-contain{
+  border-top-left-radius: 0.6em;
+  border-top-right-radius: 0.6em;
+  border-bottom-left-radius: 0.6em;
+  border-bottom-right-radius: 0.6em;
+  background-color: thistle;
+  margin-top: 2em;
+  margin-bottom: 5em;
+
+}
+
+#map{
+  width: 100%;
+  height: 300px;
+  border-top-left-radius: 0.6em;
+  border-top-right-radius: 0.6em;
+  border-bottom-left-radius: 0.6em;
+  border-bottom-right-radius: 0.6em;
 }
