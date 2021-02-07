@@ -1,7 +1,6 @@
 
 
 
-
 /* --------------------- form on pick tbd.ejs page --------------------*/
 
 .form-contain{
@@ -177,7 +176,7 @@
 
 
 
-
+/* RESULTS PAGE */
 .results-main-contain{
   padding: 8.5em 10vw 3em 10vw;
   min-height: 60vw;
@@ -282,3 +281,5 @@
   max-width: 100%;
 }
 
+
+/* FAVORITES PAGE */
