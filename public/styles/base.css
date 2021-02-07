@@ -109,6 +109,15 @@ button{
     margin-top: 0.7em;
   }
 
+  .weather-wrapperP{
+    width: 103%;
+  }
+
+  .weather-item{
+    width: 44vw;
+    margin-right: 2vw;
+  }
+
 
 }
 
@@ -138,6 +147,23 @@ button{
     width: 100%;
     padding-bottom: 5vw;
   }
+
+  .weather-item{
+    width: 25%;
+    min-width: 25%;
+    margin-right: 0vw;
+    padding-right: 1em;
+  }
+
+  .weather-content-wrapper{
+    padding-bottom: 2em;
+ 
+  }
+
+  .weather-content-info-contain{
+    display: flex;
+  }
+  
 
 }
 
