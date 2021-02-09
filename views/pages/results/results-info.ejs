@@ -3,6 +3,9 @@
 <head>
   <%- include('../../layout/head') %>
 
+ 
+
+
   
 
 
@@ -23,6 +26,27 @@
      
 
       <div class="results-main-contain">
+
+        <h2>Map</h2>
+        <div class="map-contain">
+          <div id="map">
+
+          </div>
+
+        </div>
+        <script>
+          function initMap() {
+            let uluru ={lat: -25.344, lng: 131.036};
+            let map = new google.maps.Map(
+              document.getElementById('map'), {zoom: 4, center: uluru}
+
+            );
+            let marker= new google.maps.Marker({position: uluru, map: map});
+          }
+
+        </script>
+
+
 
 
         <div id="seperator">
@@ -329,6 +353,6 @@
   <footer>
     
   </footer>
-  
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-lL29OaN72DOYFBp38MLlbcvLUpUOLQ4&callback=initMap&libraries=&v=weekly"></script>
 </body>
 </html>

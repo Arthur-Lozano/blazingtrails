@@ -7,3 +7,7 @@
 ### Trello
 - https://trello.com/b/Tjqxe0oo/blazing-trails
 
+
+### Assets / pictues 
+- https://elements.envato.com/ 
+- licensed under 

@@ -32,7 +32,26 @@ app.get('/hiking/:hiking_id', getHiking);
 app.get('/camping/:camping_id', getCamping);
 app.post('/results', )
 
-
+// 
+// function homeHandler(req, res) {
+//   const SQL = 'SELECT * FROM shelf;';
+//   return client.query(SQL)
+//     .then(results => {
+//       console.log(results.rows);
+//       res.render('pages/index', { book: results.rows });
+//     });
+// }
+function defaultHandler(req, res) {
+  let SQL = 'SELECT * FROM camping, hiking';
+  client.query(SQL)
+    .then(results => {
+      let yourFavs = results.rows;
+      res.status(200).render('pages/index', { data: yourFavs });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
 
 function addHiking(request, response) {
   const {name, types, business_status, formatted_address, rating } = request.body;
@@ -74,8 +93,8 @@ function getHiking(request, response) {
       console.log(error);
       response.render('pages/error');
     });
-}
 
+  
 function getCamping(request, response) {
   const sql = 'SELECT * FROM camping;';
    client.query(sql)
@@ -90,8 +109,6 @@ function getCamping(request, response) {
     });
 }
 
-
-
 // IQAIR API 
 function iHandler(request, response, campArray, weatherData) {
   let location = request.body.city;
@@ -101,11 +118,19 @@ function iHandler(request, response, campArray, weatherData) {
   superagent.get(URL)
     .then(data => {
       const airQ = data.body.data.current.pollution;
+
       console.log(airQ)
+
       const yourAir = new Quality(airQ);
       response.render('pages/results/results-info', { request, response, campArray, weatherData, yourAir });
     });
 }
+
+//Home Handler
+function homeHandler(request, response) {
+  response.render('pages/pick/tbd')
+}
+
 
     
 
@@ -132,8 +157,6 @@ function weatherHandler(request, response, campArray) {
     });
 }
 
-
-
 //Google API 
 function GHandler(request, response) {
   let location = request.body.city;
@@ -146,8 +169,6 @@ function GHandler(request, response) {
       weatherHandler(request, response, campArray);
     });
 }
-
-
 //Google Constructor
 function Google(results) {
   this.name = results.name;
@@ -156,16 +177,11 @@ function Google(results) {
   this.formatted_address = results.formatted_address;
   this.rating = results.rating;
 }
-
-
 //Weather Constructor
 function Weather(result) {
   this.time = new Date(result.ts * 1000).toDateString();
   this.forecast = result.weather.description;
 }
-
-
-
 //Iq Construtor
 function Quality(result) {
   this.ts = result.ts;
@@ -174,9 +190,6 @@ function Quality(result) {
   this.aqicn = result.aqicn;
   this.maincn = result.maincn;
 }
-
-
-
 app.listen(PORT, () => {
   console.log(`App Listening on port: ${PORT}`);
 });
