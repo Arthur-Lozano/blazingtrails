@@ -9,8 +9,8 @@ const superagent = require('superagent');
 const pg = require('pg');
 const methodOverride = require('method-override');
 // Database Connection Setup
-// const client = new pg.Client(process.env.DATABASE_URL);
-// client.on('error', err => { throw err; });
+const client = new pg.Client(process.env.DATABASE_URL);
+client.on('error', err => { throw err; });
 // Step 2:  Set up our application
 app.use(cors());
 app.set('view engine', 'ejs');
@@ -22,37 +22,101 @@ const PORT = process.env.PORT || 3000;
 //routes
 app.get('/', homeHandler);
 app.post('/search', GHandler);//posting new information to server/search route
-
-    // IQAIR API 
-    function iHandler(request, response, campArray, weatherData) {
-      let location = request.body.city;
-      const key = process.env.IQKey;
-      let URL = `http://api.airvisual.com/v2/city?city=${location}&state=Washington&country=USA&key=${key}`;
-      console.log(URL)
-      superagent.get(URL)
-        .then(data => {
-          const airQ = data.body.data.current.pollution;
-          console.log(airQ)
-          const yourAir = new Quality(airQ);
-          response.render('pages/results/results-info', { request, response, campArray, weatherData, yourAir });
-        });
-    }
-
-          const campGround = data.body.data;
-          // const finalBookArray = data.body.data.map(campGround => new Camp(campGround));
-          response.render('index', { weatherData, data:campArray, data:weatherArr });
-        });
-    }
-
-
+//DB Routes
+app.get('/hiking/:hiking_id', getHiking);
+app.get('/camping/:camping_id', getCamping);
+app.post('/results', )
+// 
+// function homeHandler(req, res) {
+//   const SQL = 'SELECT * FROM shelf;';
+//   return client.query(SQL)
+//     .then(results => {
+//       console.log(results.rows);
+//       res.render('pages/index', { book: results.rows });
+//     });
+// }
+function defaultHandler(req, res) {
+  let SQL = 'SELECT * FROM camping, hiking';
+  client.query(SQL)
+    .then(results => {
+      let yourFavs = results.rows;
+      res.status(200).render('pages/index', { data: yourFavs });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
+function addHiking(request, response) {
+  const {name, types, business_status, formatted_address, rating } = request.body;
+  const sql = 'INSERT INTO hiking (name, types, business_status, formatted_address, rating) VALUES ($1,$2,$3,$4,$5);';
+  const safeValues = [name, types, business_status, formatted_address, rating];
+  client.query(sql, safeValues)
+    .then(() => {
+      console.log(`${name} added to your favorites!`);
+      response.redirect(`pages/searches/search`);
+    }).catch((error) => {
+      console.log(error);
+      response.render('pages/error');
+    });
+}
+function addCamping(request, response) {
+  const { name, types, business_status, formatted_address, rating} = request.body;
+  const sql = 'INSERT INTO camping (name, types, business_status, formatted_address, rating) VALUES ($1,$2,$3,$4,$5);';
+  const safeValues = [name, types, business_status, formatted_address, rating];
+  client.query(sql, safeValues)
+    .then(() => {
+      console.log(`${name} added to your favorites!`);
+      response.redirect(`pages/searches/search`);
+    }).catch((error) => {
+      console.log(error);
+      response.render('pages/error');
+    });
+}
+function getHiking(request, response) {
+  const sql = 'SELECT * FROM hiking;';
+   client.query(sql)
+    .then(results => {
+      console.log(results.rows);
+      let data = results.rows;
+      response.status(200).render('pages/favorites/favorites', {data});
+    })
+    .catch((error) => {
+      console.log(error);
+      response.render('pages/error');
+    });
+}
+function getCamping(request, response) {
+  const sql = 'SELECT * FROM camping;';
+   client.query(sql)
+    .then(results => {
+      console.log(results.rows);
+      let data = results.rows;
+      response.status(200).render('pages/favorites/favorites', {data});
+    })
+    .catch((error) => {
+      console.log(error);
+      response.render('pages/error');
+    });
+}
+// IQAIR API 
+function iHandler(request, response, campArray, weatherData) {
+  let location = request.body.city;
+  const key = process.env.IQKey;
+  let URL = `http://api.airvisual.com/v2/city?city=${location}&state=Washington&country=USA&key=${key}`;
+  console.log(URL)
+  superagent.get(URL)
+    .then(data => {
+      const airQ = data.body.data.current.pollution;
+      const yourAir = new Quality(airQ);
+      response.render('pages/results/results-info', { request, response, campArray, weatherData, yourAir });
+    });
+}
 //Home Handler
-
-function homeHandler (request, response) {
+function homeHandler(request, response) {
   response.render('pages/pick/tbd')
 }
-
- //Weather API
- function weatherHandler(request, response, campArray) {
+//Weather API
+function weatherHandler(request, response, campArray) {
   let key = process.env.WEATHER_API_KEY;
   let location = request.body.city;
   const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${key}&city=${location}&country=US&days=8`;
@@ -65,25 +129,18 @@ function homeHandler (request, response) {
       response.status(500).send('So sorry, something went wrong.');
     });
 }
-
-
-
- //Google API 
- function GHandler(request, response) {
+//Google API 
+function GHandler(request, response) {
   let location = request.body.city;
   let travelType = request.body.search;
-  // if (travelType === 'hiking' ? travelType = 'hiking':travelType='camping'); 
   const key = process.env.API_KEY;
   let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}&query=${travelType}+in+${location}`;
-  // let URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${key}=hiking+in+${location}`;
   superagent.get(URL)
     .then(data => {
       const campArray = data.body.results.map(campGround => new Google(campGround));
       weatherHandler(request, response, campArray);
     });
 }
-
-
 //Google Constructor
 function Google(results) {
   this.name = results.name;
@@ -92,16 +149,11 @@ function Google(results) {
   this.formatted_address = results.formatted_address;
   this.rating = results.rating;
 }
-
-
 //Weather Constructor
 function Weather(result) {
   this.time = new Date(result.ts * 1000).toDateString();
   this.forecast = result.weather.description;
 }
-
-
-
 //Iq Construtor
 function Quality(result) {
   this.ts = result.ts;
@@ -110,9 +162,6 @@ function Quality(result) {
   this.aqicn = result.aqicn;
   this.maincn = result.maincn;
 }
-
-
-
 app.listen(PORT, () => {
   console.log(`App Listening on port: ${PORT}`);
 });
