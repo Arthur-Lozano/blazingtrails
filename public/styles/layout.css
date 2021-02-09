@@ -1,7 +1,6 @@
 
 
 
-
 /* --------------------- form on pick tbd.ejs page --------------------*/
 
 .form-contain{
@@ -174,6 +173,9 @@
 
 
 
+
+
+/* RESULTS PAGE */
 
 .results-main-contain{
   padding: 8.5em 10vw 3em 10vw;
@@ -361,6 +363,7 @@
   margin-bottom: 5em;
 }
 
+
 .map-contain{
   border-top-left-radius: 0.6em;
   border-top-right-radius: 0.6em;
@@ -380,3 +383,4 @@
   border-bottom-left-radius: 0.6em;
   border-bottom-right-radius: 0.6em;
 }
+

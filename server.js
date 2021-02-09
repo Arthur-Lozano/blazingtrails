@@ -8,24 +8,30 @@ const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
 const methodOverride = require('method-override');
+
 // Database Connection Setup
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', err => { throw err; });
+
 // Step 2:  Set up our application
 app.use(cors());
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+
 // declare port for server
 const PORT = process.env.PORT || 3000;
+
 //routes
 app.get('/', homeHandler);
 app.post('/search', GHandler);//posting new information to server/search route
+
 //DB Routes
 app.get('/hiking/:hiking_id', getHiking);
 app.get('/camping/:camping_id', getCamping);
 app.post('/results', )
+
 // 
 // function homeHandler(req, res) {
 //   const SQL = 'SELECT * FROM shelf;';
@@ -46,6 +52,7 @@ function defaultHandler(req, res) {
       console.log(err);
     });
 }
+
 function addHiking(request, response) {
   const {name, types, business_status, formatted_address, rating } = request.body;
   const sql = 'INSERT INTO hiking (name, types, business_status, formatted_address, rating) VALUES ($1,$2,$3,$4,$5);';
@@ -59,6 +66,7 @@ function addHiking(request, response) {
       response.render('pages/error');
     });
 }
+
 function addCamping(request, response) {
   const { name, types, business_status, formatted_address, rating} = request.body;
   const sql = 'INSERT INTO camping (name, types, business_status, formatted_address, rating) VALUES ($1,$2,$3,$4,$5);';
@@ -72,6 +80,7 @@ function addCamping(request, response) {
       response.render('pages/error');
     });
 }
+
 function getHiking(request, response) {
   const sql = 'SELECT * FROM hiking;';
    client.query(sql)
@@ -84,7 +93,8 @@ function getHiking(request, response) {
       console.log(error);
       response.render('pages/error');
     });
-}
+
+  
 function getCamping(request, response) {
   const sql = 'SELECT * FROM camping;';
    client.query(sql)
@@ -98,6 +108,7 @@ function getCamping(request, response) {
       response.render('pages/error');
     });
 }
+
 // IQAIR API 
 function iHandler(request, response, campArray, weatherData) {
   let location = request.body.city;
@@ -107,14 +118,30 @@ function iHandler(request, response, campArray, weatherData) {
   superagent.get(URL)
     .then(data => {
       const airQ = data.body.data.current.pollution;
+
+      console.log(airQ)
+
       const yourAir = new Quality(airQ);
       response.render('pages/results/results-info', { request, response, campArray, weatherData, yourAir });
     });
 }
+
 //Home Handler
 function homeHandler(request, response) {
   response.render('pages/pick/tbd')
 }
+
+
+    
+
+
+
+//Home Handler
+
+function homeHandler(request, response) {
+  response.render('pages/pick/tbd')
+}
+
 //Weather API
 function weatherHandler(request, response, campArray) {
   let key = process.env.WEATHER_API_KEY;
@@ -129,6 +156,7 @@ function weatherHandler(request, response, campArray) {
       response.status(500).send('So sorry, something went wrong.');
     });
 }
+
 //Google API 
 function GHandler(request, response) {
   let location = request.body.city;

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+ 
+  <ul>
+    <% campArray.forEach(google => { %>
+      <li> <%= google.name %> </li>
+      <li> <%= google.types %> </li>
+      <li> <%= google.business_status %> </li>
+      <li> <%= google.formatted_address %> </li>
+      <li> <%= google.rating %> </li>
+      <% }) %>
+  </ul>
+
+  <ul>
+    <% weatherData.forEach(weather => { %>
+      <li> <%= weather.time %> </li>
+      <li> <%= weather.forecast %> </li>
+      <% }) %>
+  </ul>
+
+  <ul>
+      <li> <%= yourAir.ts %> </li>
+      <li> <%= yourAir.aqius %> </li>
+      <li> <%= yourAir.mainus %> </li>
+      <li> <%= yourAir.aqicn %> </li>
+      <li> <%= yourAir.maincn %> </li>
+  </ul>
+
+</body>
+</html>
