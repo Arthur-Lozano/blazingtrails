@@ -26,6 +26,14 @@
      
 
       <div class="results-main-contain">
+        
+        <ul>
+            <li> <%= yourAir.ts %> </li>
+            <li> <%= yourAir.aqius %> </li>
+            <li> <%= yourAir.mainus %> </li>
+            <li> <%= yourAir.aqicn %> </li>
+            <li> <%= yourAir.maincn %> </li>
+        </ul>
 
         <h2>Map</h2>
         <div class="map-contain">
@@ -53,87 +61,27 @@
           <h2>weather</h2>
           <div class="weather-wrapper">
             
-          
-            <div class="weather-item"> <!---------------- one item------------------>
-              <div class="weather-item-wrapper">
-                <div class="weather-img" style="background-image: url(../../img/snowflake.png)"></div>
-                <div class="item-test-wrap">
-                  <h6>Sunny</h6>
-                  <div class="weather-content-info-contain">
-                    <div class="wea-info">
-                      <p>Sat 23rd 2021</p>
-                    </div>
-                    <div class="wea-info">
-                      <p>this some info</p>
-      
-                    </div>
-                    <div class="wea-info">
-                      <p>this some info</p>
-      
-                    </div>
-                    
-      
-                  </div>
-      
-      
-                </div>
-              </div>
-            </div>  <!---- one item end ---->
-
-            <div class="weather-item"> <!---------------- one item------------------>
-              <div class="weather-item-wrapper">
-                <div class="weather-img" style="background-image: url(../../img/storm.png)"></div>
-                <div class="item-test-wrap">
-                  <h6>Sunny</h6>
-                  <div class="weather-content-info-contain">
-                    <div class="wea-info">
-                      <p>Sat 23rd 2021</p>
-                    </div>
-                    <div class="wea-info">
-                      <p>this some info</p>
-      
-                    </div>
-                    <div class="wea-info">
-                      <p>this some info</p>
-      
-                    </div>
-                    
-      
-                  </div>
-      
-      
-                </div>
-              </div>
-            </div>  <!---- one item end ---->
-
-            <div class="weather-item"> <!---------------- one item------------------>
-              <div class="weather-item-wrapper">
-                <div class="weather-img" style="background-image: url(../../img/rain2.png)"></div>
-                <div class="item-test-wrap">
-                  <h6>Sunny</h6>
-                  <div class="weather-content-info-contain">
-                    <div class="wea-info">
-                      <p>Sat 23rd 2021</p>
-                    </div>
-                    <div class="wea-info">
-                      <p>this some info</p>
-      
-                    </div>
-                    <div class="wea-info">
-                      <p>this some info</p>
-      
-                    </div>
-                    
-      
-                  </div>
-      
-      
-                </div>
-              </div>
-            </div>  <!---- one item end ---->
-
             
-
+            
+            <% weatherData.forEach(weather => { %>
+              <div class="weather-item"> <!---------------- one item------------------>
+                <div class="weather-item-wrapper">
+                  <div class="weather-img" style="background-image: url(../../img/snowflake.png)"></div>
+                  <div class="item-test-wrap">
+                    <h6><%= weather.forecast %></h6>
+                    <div class="weather-content-info-contain">
+                      <div class="wea-info">
+                        <p><%= weather.time %> </p>
+                      </div>
+                      <div class="wea-info">
+                        <p><%= weather.forecast %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>  <!---- one item end ---->
+              
+            <% }) %>
             
 
   
@@ -146,180 +94,65 @@
 
         <div class="res-content-wrapper">
           <div class="list">
-
-            <div class="res-item">   <!---------------- one item------------------>
-              <a class="res-link" href="#">
-                <div class="res-img-wrapper">
-                  <div class="res-photo" style="background-image: url(../../img/mountain.png)">
-                    <img class="res-img-fill"src="" alt="">
+    
+            
+            <% campArray.forEach(google => { %>
+              
+              <div class="res-item">   <!---------------- one item------------------>
+                <a class="res-link" href="#">
+                  <div class="res-img-wrapper">
+                    <div class="res-photo" style="background-image: url(../../img/mountain.png)">
+                      <img class="res-img-fill"src="" alt="">
+                    </div>
                   </div>
-                </div>
-
-                <div class="res-contents">
-                  <h6>The reserve Oregon trails</h6>
-                  <div class="button-wrapper-save">
-                    <button class="solid-btn-save"> ADD TO FAVORITES</button>
+                  
+                  <div class="res-contents">
+                    <h6><%= google.name %></h6>
+                    <div class="button-wrapper-save">
+                      <form action = "/saves" method="post">
+                        <input type="hidden" name="name" value="<%= google.name %>">
+                        <input type="hidden" name="address" value="<%= google.formatted_address%>">
+                        <input type="hidden" name="status" value="<%= google.business_status%>">
+                        <input type="hidden" name="types" value="<%= google.types%>">
+                        <input type="hidden" name="rating" value="<%= google.rating%>">
+                        <button class="solid-btn-save" type="submit">add to Favorites</button>
+                      </form>
+                    
+                    </div>
+                    <div class="cont-line-one">
+                      
+                      <div class="cont">
+                        <img class="icon" src="../../img/map-treasure-search.png" alt="">
+                        <p><%= google.formatted_address %></p>
+                      </div>
+                      
+                      <div class="cont">
+                        <img class="icon" src="../../img/hat-adventure.png" alt="">
+                        <p><%= google.business_status %></p>
+                      </div>
+                      
+                      <div class="cont">
+                        <img class="icon" src="../../img/cooking-kettle.png" alt="">
+                        <p><%= google.types %></p>
+                      </div>
+                      
+                      <div class="cont">
+                        <img class="icon" src="../../img/lighter-fire.png" alt="">
+                        <p><%= google.rating %></p>
+                      </div>
+                      
+                    </div>
+                    
                   </div>
-                  <div class="cont-line-one">
+                  
+                </a>
+                
+              </div>   <!---- one item end ---->
 
-                    <div class="cont">
-                      <img class="icon" src="../../img/map-treasure-search.png" alt="">
-                      <p>this is a bunch of info about</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/hat-adventure.png" alt="">
-                      <p>We got more info here</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/cooking-kettle.png" alt="">
-                      <p>These coould be some cool stuff</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/lighter-fire.png" alt="">
-                      <p>4.5</p>
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </a>
-
-            </div>   <!---- one item end ---->
+            <% }) %>
 
 
-            <div class="res-item">   <!---------------- one item------------------>
-              <a class="res-link" href="#">
-                <div class="res-img-wrapper">
-                  <div class="res-photo" style="background-image: url(../../img/mountain.png)">
-                    <img class="res-img-fill"src="" alt="">
-                  </div>
-                </div>
-
-                <div class="res-contents">
-                  <h6>The reserve Oregon trails</h6>
-                  <div class="button-wrapper-save">
-                    <button class="solid-btn-save"> ADD TO FAVORITES</button>
-                  </div>
-                  <div class="cont-line-one">
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/map-treasure-search.png" alt="">
-                      <p>this is a bunch of info about</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/hat-adventure.png" alt="">
-                      <p>We got more info here</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/cooking-kettle.png" alt="">
-                      <p>These coould be some cool stuff</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/lighter-fire.png" alt="">
-                      <p>4.5</p>
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </a>
-
-            </div>   <!---- one item end ---->
-
-
-            <div class="res-item">   <!---------------- one item------------------>
-              <a class="res-link" href="#">
-                <div class="res-img-wrapper">
-                  <div class="res-photo" style="background-image: url(../../img/mountain.png)">
-                    <img class="res-img-fill"src="" alt="">
-                  </div>
-                </div>
-
-                <div class="res-contents">
-                  <h6>The reserve Oregon trails</h6>
-                  <div class="button-wrapper-save">
-                    <button class="solid-btn-save"> ADD TO FAVORITES</button>
-                  </div>
-                  <div class="cont-line-one">
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/map-treasure-search.png" alt="">
-                      <p>this is a bunch of info about</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/hat-adventure.png" alt="">
-                      <p>We got more info here</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/cooking-kettle.png" alt="">
-                      <p>These coould be some cool stuff</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/lighter-fire.png" alt="">
-                      <p>4.5</p>
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </a>
-
-            </div>   <!---- one item end ---->
-
-            <div class="res-item">   <!---------------- one item------------------>
-              <a class="res-link" href="#">
-                <div class="res-img-wrapper">
-                  <div class="res-photo" style="background-image: url(../../img/mountain.png)">
-                    <img class="res-img-fill"src="" alt="">
-                  </div>
-                </div>
-
-                <div class="res-contents">
-                  <h6>The reserve Oregon trails</h6>
-                  <div class="button-wrapper-save">
-                    <button class="solid-btn-save"> ADD TO FAVORITES</button>
-                  </div>
-                  <div class="cont-line-one">
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/map-treasure-search.png" alt="">
-                      <p>this is a bunch of info about</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/hat-adventure.png" alt="">
-                      <p>We got more info here</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/cooking-kettle.png" alt="">
-                      <p>These coould be some cool stuff</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/lighter-fire.png" alt="">
-                      <p>4.5</p>
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </a>
-
-            </div>   <!---- one item end ---->
+            
 
 
             
