@@ -11,9 +11,12 @@ const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
 const methodOverride = require('method-override');
+
+
 // Database Connection Setup
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', err => { throw err; });
+
 // Step 2:  Set up our application
 app.use(cors());
 app.set('view engine', 'ejs');
@@ -22,6 +25,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 // declare port for server
 const PORT = process.env.PORT || 3000;
+
+
+
 //routes
 app.get('/', homeHandler);
 app.get('/pick', searchpageHandler);
@@ -29,15 +35,8 @@ app.get('/favs', favHandler);
 app.post('/search', GHandler);//posting new information to server/search route
 //DB Routes
 app.post('/saves', saveHikeAndCamp);
-// 
-// function homeHandler(req, res) {
-//   const SQL = 'SELECT * FROM shelf;';
-//   return client.query(SQL)
-//     .then(results => {
-//       console.log(results.rows);
-//       res.render('pages/index', { book: results.rows });
-//     });
-// }
+
+
 
 
 //Home Handler
@@ -45,9 +44,11 @@ function homeHandler(request, response) {
   response.render('index');
 }
 
+
 function searchpageHandler(req,res){
   res.render('pages/pick/tbd');
 }
+
 
 function favHandler(req, res) {
   const SQL = 'SELECT * FROM hiking;';
@@ -63,16 +64,18 @@ function favHandler(req, res) {
 }
 
 
-function saveHikeAndCamp(req, response) {
-  const SQL = `INSERT INTO hiking(name,address,status,types,rating)VALUES($1,$2,$3,$4,$5)RETURNING*`;
-  const values = [req.body.name, req.body.address, req.body.status, req.body.types, req.body.rating];
+function saveHikeAndCamp(req, res) {
+  const {name, types, status, address, rating} = req.body;
+  const SQL = `INSERT INTO hiking (name,types,business_status,formatted_address,rating) VALUES ($1,$2,$3,$4,$5);`;
+  const values = [name, types, status, address, rating];
   console.log(SQL,values);
-  client.query(SQL, values)
-    .then(results => {
-      
+  client.query(SQL,values)
+    .then( results => {
+      console.log('we did it boy');
+      res.redirect('/');
     }).catch((error) => {
       console.log(error);
-      response.render('pages/error');
+      res.render('pages/error');
     });
 }
 
@@ -145,6 +148,13 @@ function Quality(result) {
   this.aqicn = result.aqicn;
   this.maincn = result.maincn;
 }
-app.listen(PORT, () => {
-  console.log(`App Listening on port: ${PORT}`);
-});
+
+
+client.connect()
+  .then( () =>{
+    app.listen(PORT, () => {
+      console.log(`App Listening on port: ${PORT}`);
+      console.log(client.connectionParameters.database);
+    });
+
+  })
