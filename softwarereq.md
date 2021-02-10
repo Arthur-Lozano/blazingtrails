@@ -1,7 +1,7 @@
 # Software Requirements
 
 ### What is the vision of this product?
-- The vision is to create a single point of reference for those who want to discover hiking trails and camping destinations based on a location they choose to search for. It will also give them current weather reports of those locations and allow them to save whatever trails and camp sites to a favorites list for future refernce 
+- The vision is to create a single point of reference for those who want to discover WA state-based hiking trails and camping destinations based on a location they choose to search for. It will also give them current weather forecasts and air quality reports of those locations and allow them to save whatever trails and camp sites to a favorites list for future refernce 
 
 ### What pain point does this project solve?
 - It creates a one-stop-shop for researching multiple outdoor activities, like camping and hiking, as well as give users a chance to save their favorites to a list to reference in the future.
