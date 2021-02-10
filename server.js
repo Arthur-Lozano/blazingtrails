@@ -79,7 +79,26 @@ function saveHikeAndCamp(req, res) {
     });
 }
 
+//Google Photo API 
+function photoHandler(request, response, campArray, weatherData, yourAir ) {
+  const key = process.env.GPHOTO;
+  let URL = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoRef}&key=${key}`;
+  superagent.get(URL)
+    .then(data => {
+      console.log(data.body);
+      const gPhoto = data.body.results.map(thePhoto => new Google(thePhoto));
+      weatherHandler(request, response, campArray);
 
+      const airQ = data.body.data.current.pollution;
+      const yourPhoto = new Quality(airQ);
+
+      response.render('pages/results/results-info', { request, response, campArray, weatherData, yourAir, yourPhoto });
+
+
+
+      console.log('camp array >>>>>>>>>>>>>>>>>>>>>>>>', campArray);
+    });
+}
 
 // IQAIR API 
 function iHandler(request, response, campArray, weatherData) {
@@ -91,7 +110,7 @@ function iHandler(request, response, campArray, weatherData) {
     .then(data => {
       const airQ = data.body.data.current.pollution;
       const yourAir = new Quality(airQ);
-      response.render('pages/results/results-info', { request, response, campArray, weatherData, yourAir });
+      iHandler(request, response, campArray, weatherData, yourAir);//render once for EACH route
       // console.log('camp array >>>>>>>>>>>>>>>>>>>>>>>>', campArray);
     });
 }
@@ -129,11 +148,18 @@ function GHandler(request, response) {
 }
 //Google Constructor
 function Google(results) {
+  // console.log(results);
   this.name = results.name;
   this.types = results.types;
   this.business_status = results.business_status;
   this.formatted_address = results.formatted_address;
   this.rating = results.rating;
+  this.latLon = results.geometry.location;
+  this.photoRef = results.photos ? results.photos[0].photo_reference : "ATtYBwKqw1Vj1GPGBlRIOgRI9KCWsquDnKd0uezUlIHYFOGX05eNcw_RX_xNZaKKxFOXh69bjnT2eb2T27w93CG41f2KP3ywS8_20u1wFzMACs0aSKFJGkQgxJEEIDXBUPs3Dbj2R7KkIprmaPfl2u_Yu0kGa_TYX9IpA2ZWpNgXT6xK6GbH";
+  this.yourPhoto = function() {
+
+  }
+  console.log(this);
 }
 //Weather Constructor
 function Weather(result) {
