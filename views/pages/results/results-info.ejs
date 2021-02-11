@@ -28,31 +28,155 @@
       <div class="results-main-contain">
         
         <ul>
+            
+
             <li> <%= yourAir.ts %> </li>
             <li> <%= yourAir.aqius %> </li>
             <li> <%= yourAir.mainus %> </li>
             <li> <%= yourAir.aqicn %> </li>
             <li> <%= yourAir.maincn %> </li>
+
         </ul>
 
         <h2>Map</h2>
         <div class="map-contain">
           <div id="map">
+        
+
 
           </div>
 
         </div>
+        
+        
+
+      
+
         <script>
           function initMap() {
-            let uluru ={lat: -25.344, lng: 131.036};
-            let map = new google.maps.Map(
-              document.getElementById('map'), {zoom: 4, center: uluru}
+              let cords = '<%=campArrayString%>'.split(',')
+              console.log('<%=campArrayString%>')
+              
+              console.log(typeof cords);
+              console.log(cords)
 
-            );
-            let marker= new google.maps.Marker({position: uluru, map: map});
+
+              var myLatLng = {
+                lat: 47.5556377,
+                lng: -122.3750936
+              };
+
+              var myLatLngTwo = {
+                lat: 47.5120301,
+                lng: 122.3435675
+              };
+
+              var myLatLngThree = {
+                lat: 47.5808895,
+                lng: -122.3921053
+              };
+
+              var myLatLngFour = {
+                lat: 47.6658281,
+                lng: -122.3452842
+              };
+
+              var myLatLngFive = {
+                lat: 47.703196,
+                lng: -122.508645
+              };
+
+              var myLatLngSix = {
+                lat: 47.5464356,
+                lng: -122.3150332
+              };
+
+              var myLatLngSeven = {
+                lat: 47.41182,
+                lng: -122.2623134
+              };
+
+              var myLatLngEight = {
+                lat: 47.5495416,
+                lng: -122.2505613
+              };
+
+              var myLatLngNine = {
+                lat: 47.7804861,
+                lng: -122.2166873
+              };
+
+            
+
+              console.log('we in the new map boy');
+      
+              var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 8,
+                  center: myLatLng
+              });
+      
+              var marker = new google.maps.Marker({
+                  position: myLatLng,
+                  map: map,
+                  title: 'Hello World!'
+              });
+
+              var marker = new google.maps.Marker({
+                  position: myLatLngTwo,
+                  map: map,
+                  title: 'Hello World!'
+              });
+
+              var marker = new google.maps.Marker({
+                  position: myLatLngThree,
+                  map: map,
+                  title: 'Hello World!'
+              });
+
+              var marker = new google.maps.Marker({
+                  position: myLatLngFour,
+                  map: map,
+                  title: 'Hello World!'
+              });
+
+              var marker = new google.maps.Marker({
+                  position: myLatLngFive,
+                  map: map,
+                  title: 'Hello World!'
+              });
+
+              var marker = new google.maps.Marker({
+                  position: myLatLngSix,
+                  map: map,
+                  title: 'Hello World!'
+              });
+
+              var marker = new google.maps.Marker({
+                  position: myLatLngSeven,
+                  map: map,
+                  title: 'Hello World!'
+              });
+
+              var marker = new google.maps.Marker({
+                  position: myLatLngEight,
+                  map: map,
+                  title: 'Hello World!'
+              });
+
+              var marker = new google.maps.Marker({
+                  position: myLatLngNine,
+                  map: map,
+                  title: 'Hello World!'
+              });
+
+              
+
+              
           }
-
         </script>
+
+
+      
 
 
 
@@ -101,8 +225,8 @@
               <div class="res-item">   <!---------------- one item------------------>
                 <a class="res-link" href="#">
                   <div class="res-img-wrapper">
-                    <div class="res-photo" style="background-image: url(../../img/mountain.png)">
-                      <img class="res-img-fill"src="" alt="">
+                    <div class="res-photo" style="background-image: url()">
+                      <img class="res-img-fill"src="<%= google.photoRef %>" alt="">
                     </div>
                   </div>
                   
@@ -140,6 +264,9 @@
                         <img class="icon" src="../../img/lighter-fire.png" alt="">
                         <p><%= google.rating %></p>
                       </div>
+                    
+
+            
                       
                     </div>
                     
