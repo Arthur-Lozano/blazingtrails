@@ -10,4 +10,10 @@
 
 ### Assets / pictues 
 - https://elements.envato.com/ 
-- licensed under 
+- licensed under
+
+
+### Authors
+- Tek Jones
+- Ryan Tipper
+- Arthur Lozano Jr

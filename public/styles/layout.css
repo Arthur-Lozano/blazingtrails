@@ -50,7 +50,6 @@
   background-color: #c6dfe4;
   max-width: 80%;
   margin: 5em auto 3em auto;
-  background-image: url('../../img/mountain.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 100% 10%;
@@ -178,7 +177,7 @@
 /* RESULTS PAGE */
 
 .results-main-contain{
-  padding: 8.5em 10vw 3em 10vw;
+  padding: 8.5em 8vw 3em 12vw;
   min-height: 60vw;
 
 }
@@ -245,12 +244,12 @@
 
 .res-contents{
   display: flex;
+  overflow-x: hidden;
   padding-top: 2.1em;
   padding-right: 2.2em;
   padding-bottom: 2.1em;
   padding-left: 2.2em;
   flex-direction: column;
-  justify-content: space-between;
   align-items: flex-start;
   flex-grow: 1;
   flex-shrink: 1;
@@ -260,6 +259,8 @@
 
 .cont-line-one{
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   margin-top: 1em;
   justify-content: flex-start;
   align-items: center;
@@ -269,6 +270,7 @@
 .cont{
   display: flex;
   margin-right: 1.6em;
+  margin-bottom: .3em;
   justify-content: flex-start;
   align-items: center;
   color: hsla(246.66666666666663, 3.61%, 48.82%, 1.00);
@@ -297,6 +299,7 @@
   width: 15.5vw;
   min-width: 15.5vw;
   margin-right: 1.5vw;
+  margin-bottom: 1em;
   
 }
 
@@ -384,3 +387,13 @@
   border-bottom-right-radius: 0.6em;
 }
 
+
+.air-contain{
+  padding-bottom: 2em;
+}
+
+.google-name-wrapper{
+  display: flex;
+  align-items: center;
+  
+}
