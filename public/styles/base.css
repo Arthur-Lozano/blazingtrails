@@ -249,9 +249,7 @@ p{
   z-index: -2;
   top: 0;
   left: 0;
-  
-  
-  
+   
 }
 
 
@@ -269,6 +267,10 @@ p{
   margin-right: 40px;
   color: #302415;
 
+}
+
+.reg-nav-wrapper{
+  
 }
 
 .reg-nav-buttons:hover{
