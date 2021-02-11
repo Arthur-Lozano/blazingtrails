@@ -80,13 +80,14 @@
 
 /* ARTHUR BIO */
 .arthurImg-wrapper {
-  position: absolute;right:30%;
+  position: absolute;right:23%;
   width: 315px;
   height: 345px;
 }
 .arthurImg {
-  width: 200%;
-  height: 100%
+  width: 130%;
+  height: 105%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 .bio-wrapper-A{
   width: 50%;
@@ -111,13 +112,14 @@
 
 /* TEK BIO */
 .tekImg-wrapper {
-  position: absolute;right:30%;
+  position: absolute;right:20%;
   width: 315px;
   height: 345px;
 }
 .tekImg {
-  width: 200%;
-  height: 100%
+  width: 110%;
+  height: 105%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 .bio-wrapper-T{
   width: 50%;
@@ -142,13 +144,14 @@
 
 /* RYAN BIO */
 .ryanImg-wrapper {
-  position: absolute;right:30%;
-  width: 315px;
-  height: 345px;
+  position: absolute;right:18%;
+  width: 340px;
+  height: 400px;
 }
 .ryanImg {
-  width: 200%;
-  height: 100%
+  width: 105%;
+  height: 105%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 .bio-wrapper-R{
   width: 50%;
@@ -156,7 +159,7 @@
   background-color: white;
   padding: 1em;
   border: 0px;
-  border-radius: .4em; 
+  border-radius: .4em;
 }
 .tbd-main-img-bio-R{
   display: flex;
@@ -170,9 +173,6 @@
   margin: 2em auto 3em auto; 
   padding: 1em;
 }
-
-
-
 
 
 /* RESULTS PAGE */
