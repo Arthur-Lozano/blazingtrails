@@ -23,6 +23,7 @@ a:link {
 body {
   font-family: 'Alegreya Sans', sans-serif;
   font-size: 1.3vw;
+  line-height: 1.16-;
   overflow-x: hidden;
   color: #20180d;
   
@@ -193,6 +194,11 @@ h6{
 p{
   line-height: 1.4;
   
+}
+
+
+.fav-h1{
+  padding-bottom: 1em;
 }
 
 
@@ -409,11 +415,11 @@ p{
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	padding:5px 5px;
+	padding: .5em;
   text-decoration:none;
   border: 0px;
-  font-size: 10px;
   margin-top: 10px;
+  font-size: .8em;
 }
 
 .solid-btn-save:hover {
@@ -446,3 +452,5 @@ p{
 	position:relative;
 	top:1px;
 }
+
+

@@ -30,11 +30,7 @@
         <ul>
             
 
-            <li> <%= yourAir.ts %> </li>
-            <li> <%= yourAir.aqius %> </li>
-            <li> <%= yourAir.mainus %> </li>
-            <li> <%= yourAir.aqicn %> </li>
-            <li> <%= yourAir.maincn %> </li>
+            
 
         </ul>
 
@@ -55,7 +51,7 @@
         <script>
           function initMap() {
               let cords = '<%=campArrayString%>'.split(',')
-              console.log('<%=campArrayString%>')
+              
               
               console.log(typeof cords);
               console.log(cords)
@@ -176,13 +172,38 @@
         </script>
 
 
+
+        <div class="air-contain">
+          <h2 class="fav-h1">Air Quality</h2>
+          <div class="air-item-wrapper">
+            <div class="air-item">
+              <p>ts: <%= yourAir.ts %></p>
+            </div>
+            <div class="air-item">
+              <p>  aqius: <%= yourAir.aqius %></p>
+            </div>
+            <div class="air-item">
+              <p>mainus: <%= yourAir.mainus %></p>
+            </div>
+            <div class="air-item">
+              <p>aqicn: <%= yourAir.aqicn %></p>
+            </div>
+            <div class="air-item">
+              <p>maincn: <%= yourAir.maincn %></p>
+            </div>
+          </div>
+
+        </div>
+
+
+
       
 
 
 
 
         <div id="seperator">
-          <h2>weather</h2>
+          <h2>Weather</h2>
           <div class="weather-wrapper">
             
             
@@ -225,22 +246,26 @@
               <div class="res-item">   <!---------------- one item------------------>
                 <a class="res-link" href="#">
                   <div class="res-img-wrapper">
-                    <div class="res-photo" style="background-image: url()">
-                      <img class="res-img-fill"src="<%= google.photoRef %>" alt="">
+                    <div class="res-photo" style="background-image: url(<%= google.photoRef %>)">
+                      <img class="res-img-fill"src="" alt="">
                     </div>
                   </div>
                   
                   <div class="res-contents">
-                    <h6><%= google.name %></h6>
-                    <div class="button-wrapper-save">
-                      <form action = "/saves" method="post">
-                        <input type="hidden" name="name" value="<%= google.name %>">
-                        <input type="hidden" name="address" value="<%= google.formatted_address%>">
-                        <input type="hidden" name="status" value="<%= google.business_status%>">
-                        <input type="hidden" name="types" value="<%= google.types%>">
-                        <input type="hidden" name="rating" value="<%= google.rating%>">
-                        <button class="solid-btn-save" type="submit">add to Favorites</button>
-                      </form>
+                    <div class="google-name-wrapper">
+                      <h6><%= google.name %></h6>
+                      <div class="button-wrapper-save">
+                        <form action = "/saves" method="post">
+                          <input type="hidden" name="name" value="<%= google.name %>">
+                          <input type="hidden" name="address" value="<%= google.formatted_address%>">
+                          <input type="hidden" name="status" value="<%= google.business_status%>">
+                          <input type="hidden" name="types" value="<%= google.types%>">
+                          <input type="hidden" name="rating" value="<%= google.rating%>">
+                          <input type="hidden" name="photoRef" value="<%= google.photoRef %>">
+                          <button class="solid-btn-save" type="submit">add to Favorites</button>
+                        </form>
+
+                    </div>
                     
                     </div>
                     <div class="cont-line-one">
