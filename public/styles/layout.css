@@ -50,7 +50,6 @@
   background-color: #c6dfe4;
   max-width: 80%;
   margin: 5em auto 3em auto;
-  background-image: url('../../img/mountain.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 100% 10%;
@@ -80,13 +79,14 @@
 
 /* ARTHUR BIO */
 .arthurImg-wrapper {
-  position: absolute;right:30%;
+  position: absolute;right:23%;
   width: 315px;
   height: 345px;
 }
 .arthurImg {
-  width: 200%;
-  height: 100%
+  width: 130%;
+  height: 105%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 .bio-wrapper-A{
   width: 50%;
@@ -111,13 +111,14 @@
 
 /* TEK BIO */
 .tekImg-wrapper {
-  position: absolute;right:30%;
+  position: absolute;right:20%;
   width: 315px;
   height: 345px;
 }
 .tekImg {
-  width: 200%;
-  height: 100%
+  width: 110%;
+  height: 105%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 .bio-wrapper-T{
   width: 50%;
@@ -142,13 +143,14 @@
 
 /* RYAN BIO */
 .ryanImg-wrapper {
-  position: absolute;right:30%;
-  width: 315px;
-  height: 345px;
+  position: absolute;right:18%;
+  width: 340px;
+  height: 400px;
 }
 .ryanImg {
-  width: 200%;
-  height: 100%
+  width: 105%;
+  height: 105%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 .bio-wrapper-R{
   width: 50%;
@@ -156,7 +158,7 @@
   background-color: white;
   padding: 1em;
   border: 0px;
-  border-radius: .4em; 
+  border-radius: .4em;
 }
 .tbd-main-img-bio-R{
   display: flex;
@@ -172,13 +174,10 @@
 }
 
 
-
-
-
-
 /* RESULTS PAGE */
+
 .results-main-contain{
-  padding: 8.5em 10vw 3em 10vw;
+  padding: 8.5em 8vw 3em 12vw;
   min-height: 60vw;
 
 }
@@ -245,12 +244,12 @@
 
 .res-contents{
   display: flex;
+  overflow-x: hidden;
   padding-top: 2.1em;
   padding-right: 2.2em;
   padding-bottom: 2.1em;
   padding-left: 2.2em;
   flex-direction: column;
-  justify-content: space-between;
   align-items: flex-start;
   flex-grow: 1;
   flex-shrink: 1;
@@ -260,6 +259,8 @@
 
 .cont-line-one{
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   margin-top: 1em;
   justify-content: flex-start;
   align-items: center;
@@ -269,6 +270,7 @@
 .cont{
   display: flex;
   margin-right: 1.6em;
+  margin-bottom: .3em;
   justify-content: flex-start;
   align-items: center;
   color: hsla(246.66666666666663, 3.61%, 48.82%, 1.00);
@@ -297,6 +299,7 @@
   width: 15.5vw;
   min-width: 15.5vw;
   margin-right: 1.5vw;
+  margin-bottom: 1em;
   
 }
 
@@ -363,3 +366,34 @@
   margin-bottom: 5em;
 }
 
+
+.map-contain{
+  border-top-left-radius: 0.6em;
+  border-top-right-radius: 0.6em;
+  border-bottom-left-radius: 0.6em;
+  border-bottom-right-radius: 0.6em;
+  background-color: thistle;
+  margin-top: 2em;
+  margin-bottom: 5em;
+
+}
+
+#map{
+  width: 100%;
+  height: 300px;
+  border-top-left-radius: 0.6em;
+  border-top-right-radius: 0.6em;
+  border-bottom-left-radius: 0.6em;
+  border-bottom-right-radius: 0.6em;
+}
+
+
+.air-contain{
+  padding-bottom: 2em;
+}
+
+.google-name-wrapper{
+  display: flex;
+  align-items: center;
+  
+}

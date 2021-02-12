@@ -23,6 +23,7 @@ a:link {
 body {
   font-family: 'Alegreya Sans', sans-serif;
   font-size: 1.3vw;
+  line-height: 1.16-;
   overflow-x: hidden;
   color: #20180d;
   
@@ -196,6 +197,11 @@ p{
 }
 
 
+.fav-h1{
+  padding-bottom: 1em;
+}
+
+
 
 .nav {
 	height: 100%;
@@ -249,9 +255,7 @@ p{
   z-index: -2;
   top: 0;
   left: 0;
-  
-  
-  
+   
 }
 
 
@@ -269,6 +273,10 @@ p{
   margin-right: 40px;
   color: #302415;
 
+}
+
+.reg-nav-wrapper{
+  
 }
 
 .reg-nav-buttons:hover{
@@ -407,11 +415,11 @@ p{
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	padding:5px 5px;
+	padding: .5em;
   text-decoration:none;
   border: 0px;
-  font-size: 10px;
   margin-top: 10px;
+  font-size: .8em;
 }
 
 .solid-btn-save:hover {
@@ -444,3 +452,5 @@ p{
 	position:relative;
 	top:1px;
 }
+
+

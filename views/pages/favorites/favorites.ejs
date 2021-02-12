@@ -22,179 +22,58 @@
       <%- include('../../layout/sidenav') %>
 
       <div class="results-main-contain">
-        <h2>Favorites</h2>
+        <h2 class="fav-h1">Favorites</h2>
         <div class="res-content-wrapper">
-          <div class="list">
-
+          <% data.forEach(google => { %>
+              
             <div class="res-item">   <!---------------- one item------------------>
               <a class="res-link" href="#">
                 <div class="res-img-wrapper">
-                  <div class="res-photo" style="background-image: url(../../img/mountain.png)">
+                  <div class="res-photo" style="background-image: url(img/mountain.png)">
                     <img class="res-img-fill"src="" alt="">
                   </div>
                 </div>
-
-                <div class="res-contents">
-                  <h6>The reserve Oregon trails</h6>
-                  <div class="cont-line-one">
                 
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/map-treasure-search.png" alt="">
-                      <p>this is a bunch of info about</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/hat-adventure.png" alt="">
-                      <p>We got more info here</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/cooking-kettle.png" alt="">
-                      <p>These coould be some cool stuff</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/lighter-fire.png" alt="">
-                      <p>4.5</p>
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </a>
-
-            </div>   <!---- one item end ---->
-
-
-            <div class="res-item">   <!---------------- one item------------------>
-              <a class="res-link" href="#">
-                <div class="res-img-wrapper">
-                  <div class="res-photo" style="background-image: url(../../img/mountain.png)">
-                    <img class="res-img-fill"src="" alt="">
-                  </div>
-                </div>
-
                 <div class="res-contents">
-                  <h6>The reserve Oregon trails</h6>
+                  <h6><%= google.name %></h6>
+                  
                   <div class="cont-line-one">
-
+                    
                     <div class="cont">
                       <img class="icon" src="../../img/map-treasure-search.png" alt="">
-                      <p>this is a bunch of info about</p>
+                      <p><%= google.formatted_address %></p>
                     </div>
-
+                    
                     <div class="cont">
                       <img class="icon" src="../../img/hat-adventure.png" alt="">
-                      <p>We got more info here</p>
+                      <p><%= google.business_status %></p>
                     </div>
-
+                    
                     <div class="cont">
                       <img class="icon" src="../../img/cooking-kettle.png" alt="">
-                      <p>These coould be some cool stuff</p>
+                      <p><%= google.types %></p>
                     </div>
-
+                    
                     <div class="cont">
                       <img class="icon" src="../../img/lighter-fire.png" alt="">
-                      <p>4.5</p>
+                      <p><%= google.rating %></p>
                     </div>
+                  
 
+          
+                    
                   </div>
-
+                  
                 </div>
-
+                
               </a>
-
+              
             </div>   <!---- one item end ---->
 
+          <% }) %>
 
-            <div class="res-item">   <!---------------- one item------------------>
-              <a class="res-link" href="#">
-                <div class="res-img-wrapper">
-                  <div class="res-photo" style="background-image: url(../../img/mountain.png)">
-                    <img class="res-img-fill"src="" alt="">
-                  </div>
-                </div>
-
-                <div class="res-contents">
-                  <h6>The reserve Oregon trails</h6>
-                  <div class="cont-line-one">
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/map-treasure-search.png" alt="">
-                      <p>this is a bunch of info about</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/hat-adventure.png" alt="">
-                      <p>We got more info here</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/cooking-kettle.png" alt="">
-                      <p>These coould be some cool stuff</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/lighter-fire.png" alt="">
-                      <p>4.5</p>
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </a>
-
-            </div>   <!---- one item end ---->
-
-            <div class="res-item">   <!---------------- one item------------------>
-              <a class="res-link" href="#">
-                <div class="res-img-wrapper">
-                  <div class="res-photo" style="background-image: url(../../img/mountain.png)">
-                    <img class="res-img-fill"src="" alt="">
-                  </div>
-                </div>
-
-                <div class="res-contents">
-                  <h6>The reserve Oregon trails</h6>
-                  <div class="cont-line-one">
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/map-treasure-search.png" alt="">
-                      <p>this is a bunch of info about</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/hat-adventure.png" alt="">
-                      <p>We got more info here</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/cooking-kettle.png" alt="">
-                      <p>These coould be some cool stuff</p>
-                    </div>
-
-                    <div class="cont">
-                      <img class="icon" src="../../img/lighter-fire.png" alt="">
-                      <p>4.5</p>
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </a>
-
-            </div>   <!---- one item end ---->
-
-
-            
-
-            
-
-          </div>
+          
+          
 
 
         </div>
