@@ -18,3 +18,6 @@
 - Ryan Tipper
 - Arthur Lozano Jr
 
+### Blazing Trails | 
+- Blazing Trails is a server-side rendered web application that allows its users to search for locations 
+
